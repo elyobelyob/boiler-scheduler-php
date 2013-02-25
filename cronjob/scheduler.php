@@ -52,7 +52,11 @@ if (count($rows) > 1) {
     //          AND (timeOff > '06:17:00' ) 
     //          AND day = 5
                     
-    $query = "SELECT * FROM boiler.schedule WHERE 
+    $query = "SELECT    hour(timeOn) as hourOn, 
+                		minute(timeOn) as minuteOn, 
+                		hour(timeOff) as hourOff, 
+                		minute(timeOff) as minuteOff  
+                FROM boiler.schedule WHERE 
                 (timeOn < '".date('G').":".date('i').":00') 
                 AND (timeOff > '".date('G').":".date('i').":00') 
                 AND day = ".date('N');
@@ -62,12 +66,22 @@ if (count($rows) > 1) {
         print_r($row).PHP_EOL;
     }
 
-    
     echo $query.PHP_EOL;
+
         
     // Override
-    $query = 'select * from override where date = '.mktime();
-    $override = mysql_query($query);
+    // select * from override where date > 1361535136 and (date+length > 1361535136)
+    // select UNIX_TIMESTAMP(date) as date, UNIX_TIMESTAMP(date+length) as datelength 
+	//     from boiler.override 
+	//     where UNIX_TIMESTAMP(date) < 1361547580 and (UNIX_TIMESTAMP(date+length) >
+    $query = "SELECT * FROM boiler.override WHERE 
+                UNIX_TIMESTAMP(date) < ".mktime()." 
+                AND (UNIX_TIMESTAMP(date + INTERVAL length MINUTE) > ".mktime().")";
+    $result = mysql_query($query) or die(mysql_error());
+
+    while($row = mysql_fetch_array($result)) {  
+        print_r($row).PHP_EOL;
+    }
 
     echo $query.PHP_EOL;
 

@@ -46,8 +46,7 @@ class Elyob_Model_Schedules extends SF_Model_Abstract
 			}
 		}
 		
-		if (!array_key_exists("hourOn", $data) || !array_key_exists("minuteOn", $data) ||
-				!array_key_exists("hourOff", $data) || !array_key_exists("minuteOff", $data)) {
+		if (!array_key_exists("timeOn", $data) || !array_key_exists("timeOff", $data)) {
 			return false;
 		}
 		

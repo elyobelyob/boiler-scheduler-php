@@ -16,7 +16,17 @@ class Elyob_Resource_Schedules extends SF_Model_Resource_Db_Table_Abstract
 	public function getSchedules()
 	{
 		$select = $this->select();
-		$select->order(array('enabled DESC', 'group ASC', 'day ASC', 'hourOn ASC', 'minuteOn ASC'));
+		$select->from(array('schedule'), array(   'hourOn' => 'hour(timeOn)',
+		                                          'minuteOn' =>'minute(timeOn)',
+		                                          'hourOff' => 'hour(timeOff)',
+		                                          'minuteOff' => 'minute(timeOff)',
+		                                          'group',
+		                                          'day',
+		                                          'heatingOn',
+		                                          'heatingTemp',
+		                                          'waterOn',
+		                                          'enabled'));
+		$select->order(array('enabled DESC', 'group ASC', 'day ASC', 'timeOn ASC'));
 		return $this->fetchAll($select);
 	}
 	
@@ -24,7 +34,7 @@ class Elyob_Resource_Schedules extends SF_Model_Resource_Db_Table_Abstract
 	{
 		$select = $this->select();
 		$select->where("day=?",$day)
-				->order(array('hourOn ASC', 'minuteOn ASC'));
+				->order(array('timeOn ASC'));
 		return $this->fetchAll($select);
 	}
 	
@@ -32,7 +42,7 @@ class Elyob_Resource_Schedules extends SF_Model_Resource_Db_Table_Abstract
 	{
 		$select = $this->select();
 		$select->where("`group`=?",$group)
-				->order(array('enabled DESC', 'day ASC', 'hourOn ASC', 'minuteOn ASC'));
+				->order(array('enabled DESC', 'day ASC', 'timeOn ASC'));
 		return $this->fetchAll($select);
 	}
 	
