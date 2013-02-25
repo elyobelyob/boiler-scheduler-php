@@ -47,6 +47,13 @@
 		</select>
 		</p>
 		<p>Heating On: <br/> <input name="heatingOn" type="checkbox" value="1" /></p>
+		<p>Heating Temp: <br/> 
+		<select name="heatingTemp">
+		<?php for ($i = 0; $i < 31; $i++) :?>
+			<option value="<?php echo $i ?>"><?php echo $i ?></option>
+		<?php endfor; ?>
+		</select>    		
+		</p>
 		<p>Water  On: <br/> <input name="waterOn" type="checkbox" value="1" /></p>
 		<p>Enabled: <br/> <input name="enabled" type="checkbox" value="1" /></p>
 		<p><input type="reset" value="Reset" />

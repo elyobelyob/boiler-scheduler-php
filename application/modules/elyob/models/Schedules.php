@@ -34,7 +34,7 @@ class Elyob_Model_Schedules extends SF_Model_Abstract
 	public function saveSchedule(array $data) 
 	{
 		//Set some defaults
-		$defaults = array("heatingOn" => 0, "waterOn" => 0, "enabled" => 0);
+		$defaults = array("heatingOn" => 0, "heatingTemp" => 0, "waterOn" => 0, "enabled" => 0);
 		return $this->saveRow($data, $defaults);
 	}
 	
@@ -42,20 +42,23 @@ class Elyob_Model_Schedules extends SF_Model_Abstract
 	{
 		foreach ($data as $item) {
 			if (!is_numeric($item)) {
-				return false;
+//				return false;
 			}
 		}
-		
-		if (!array_key_exists("timeOn", $data) || !array_key_exists("timeOff", $data)) {
+
+		if (!array_key_exists("hourOn", $data) || !array_key_exists("hourOff", $data)) {
 			return false;
 		}
 		
 		$minuteOn = $data['hourOn'] * 60 + $data['minuteOn'];
 		$minuteOff = $data['hourOff'] * 60 + $data['minuteOff'];
-		
+
 		if ($minuteOff <= $minuteOn) {
 			throw new Exception("Off time must be after the on time");
 		}
+
+		$data['timeOn'] = $data['hourOn'].':'.$data['minuteOn'].':00';
+		$data['timeOff'] = $data['hourOff'].':'.$data['minuteOff'].':00';
 		
 		// apply any defaults
 		foreach ($defaults as $col => $value) {

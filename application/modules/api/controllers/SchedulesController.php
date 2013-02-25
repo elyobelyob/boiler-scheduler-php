@@ -33,15 +33,15 @@ class Api_SchedulesController extends Zend_Controller_Action
 			}
 			$json = Zend_Json::encode($jTableResult);
 			$this->getResponse()
-			->setHttpResponseCode(200)
-			->appendBody($json);
+			     ->setHttpResponseCode(200)
+			     ->appendBody($json);
 		} else {
 			$jTableResult['Result'] = "ERROR";
 			$jTableResult['Message'] = $error;
 			$json = Zend_Json::encode($jTableResult);
 			$this->getResponse()
-			->setHttpResponseCode(200)
-			->appendBody($json);
+			     ->setHttpResponseCode(200)
+			     ->appendBody($json);
 		}
 	}
 	

@@ -48,6 +48,10 @@
                     type: 'checkbox',
                     values: { '0': 'Off', '1': 'On' },
                 },
+                heatingTemp: {
+                    title: 'Heat Temp',
+                    options: { <?php for($i=0;$i<31;$i++){echo"'$i':'$i',";}?> }
+                },
                 waterOn: {
                     title: 'Water On',
                     type: 'checkbox',

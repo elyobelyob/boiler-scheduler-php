@@ -16,7 +16,8 @@ class Elyob_Resource_Schedules extends SF_Model_Resource_Db_Table_Abstract
 	public function getSchedules()
 	{
 		$select = $this->select();
-		$select->from(array('schedule'), array(   'hourOn' => 'hour(timeOn)',
+		$select->from(array('schedule'), array(   'id',
+		                                          'hourOn' => 'hour(timeOn)',
 		                                          'minuteOn' =>'minute(timeOn)',
 		                                          'hourOff' => 'hour(timeOff)',
 		                                          'minuteOff' => 'minute(timeOff)',
