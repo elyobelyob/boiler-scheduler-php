@@ -37,11 +37,15 @@ for ($i=0;$i<count($listTemp);$i++) {
 }
 
 // Check holiday schedule
-
-$query = mysql_query('select * from boiler.configuration where holidayFrom < '.$currentTime.' and holidayTo > '.$currentTime);
+$query = 'select * from boiler.configuration where keyword = "holidayFrom" AND UNIX_TIMESTAMP(value) < '.mktime();
+echo $query . PHP_EOL;
+$result = mysql_query($query);
 $rows = mysql_fetch_array($result);
+while($row = mysql_fetch_array($result)) {  
+    print_r($row).PHP_EOL;
+}
 
-if (count($rows) > 1) { 
+if (count($row) > 1) { 
     // ignore schedule and override and set 24 hour to holiday temp
     $temp = $row['temp'];
     } else {
