@@ -37,9 +37,10 @@ for ($i=0;$i<count($listTemp);$i++) {
 }
 
 // Check holiday schedule
-$query = 'select * from boiler.configuration where keyword = "holidayFrom" AND UNIX_TIMESTAMP(value) < '.mktime();
+$query = 'select * from boiler.configuration where `key` = "holidayFrom" AND UNIX_TIMESTAMP(value) < '.mktime();
 echo $query . PHP_EOL;
 $result = mysql_query($query);
+
 $rows = mysql_fetch_array($result);
 while($row = mysql_fetch_array($result)) {  
     print_r($row).PHP_EOL;
@@ -64,33 +65,37 @@ if (count($row) > 1) {
                 (timeOn < '".date('G').":".date('i').":00') 
                 AND (timeOff > '".date('G').":".date('i').":00') 
                 AND day = ".date('N');
+    echo $query.PHP_EOL;
     $result = mysql_query($query);
     
     while($row = mysql_fetch_array($result)) {  
         print_r($row).PHP_EOL;
     }
-
-    echo $query.PHP_EOL;
-
         
     // Override
     // select * from override where date > 1361535136 and (date+length > 1361535136)
     // select UNIX_TIMESTAMP(date) as date, UNIX_TIMESTAMP(date+length) as datelength 
 	//     from boiler.override 
 	//     where UNIX_TIMESTAMP(date) < 1361547580 and (UNIX_TIMESTAMP(date+length) >
-    $query = "SELECT * FROM boiler.override WHERE 
-                UNIX_TIMESTAMP(date) < ".mktime()." 
-                AND (UNIX_TIMESTAMP(date + INTERVAL length MINUTE) > ".mktime().")";
+    $query = "SELECT    UNIX_TIMESTAMP(date) as dateout, 
+                        UNIX_TIMESTAMP(date + INTERVAL length MINUTE) as datelength, 
+                        type,
+                        date,
+                        length 
+                FROM boiler.override WHERE 
+                    UNIX_TIMESTAMP(date) < ".mktime()." 
+                    AND (UNIX_TIMESTAMP(date + INTERVAL length MINUTE) > ".mktime().")";
+    echo $query.PHP_EOL;
     $result = mysql_query($query) or die(mysql_error());
 
     while($row = mysql_fetch_array($result)) {  
         print_r($row).PHP_EOL;
     }
 
-    echo $query.PHP_EOL;
 
 }
 
+// NJB TODO
 $currentTemp = 15;
 $temp = 15;
 
