@@ -111,7 +111,8 @@ function getSchedule() {
     $query = "SELECT    hour(timeOn) as hourOn, 
                 		minute(timeOn) as minuteOn, 
                 		hour(timeOff) as hourOff, 
-                		minute(timeOff) as minuteOff  
+                		minute(timeOff) as minuteOff
+                		day,
                 FROM boiler.schedule WHERE 
                 (timeOn < '".date('G').":".date('i').":00') 
                 AND (timeOff > '".date('G').":".date('i').":00') 
