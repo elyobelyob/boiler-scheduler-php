@@ -22,7 +22,14 @@ for ($i=0;$i<count($listTemp);$i++) {
     if ($data = getEmonTemp($listTemp[$i])) {
 
     	while($rows = mysql_fetch_array($data)) {  
-        	print_r($rows).PHP_EOL;
+            $thermTime = $rows['thermTime'];
+            // time is old, then perhaps out of batteries?
+            if ($thermTime < (time()-100) ) {
+                return false;
+            } else {
+                return $result;
+            }
+    	print_r($rows).PHP_EOL;
     	}
     }
 }
@@ -72,21 +79,8 @@ function getEmonTemp($name) {
                      FROM emoncms.feeds WHERE name = '".$name."' LIMIT 0,1";
     //echo $query . PHP_EOL;
     $result = mysql_query($query);
-    echo mysql_num_rows($result) . PHP_EOL;
-    return $result;
-    
-    while($row = mysql_fetch_array($result)) {  
-        $thermTime = $row['thermTime'];
-
-        // time is old, then perhaps out of batteries?
-        if ($thermTime < (time()-100) ) {
-            return false;
-        } else {
-            return $result;
-            
-        }
-    }
-    
+    //echo mysql_num_rows($result) . PHP_EOL;
+    return $result;    
 }
 
 function getHoliday() {
