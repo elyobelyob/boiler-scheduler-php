@@ -21,7 +21,7 @@ for ($i=0;$i<count($listTemp);$i++) {
     // we grab from emoncms
     if ($data = getEmonTemp($listTemp[$i])) {
 
-    	while($rows = mysql_fetch_array($data)) {  
+    	while($rows = mysql_fetch_assoc($data)) {  
         	print_r($rows).PHP_EOL;
     	}
 
@@ -30,19 +30,19 @@ for ($i=0;$i<count($listTemp);$i++) {
 }
 
 $schedule = getSchedule();
-while($rows = mysql_fetch_array($schedule)) {  
+while($rows = mysql_fetch_assoc($schedule)) {  
     print_r($rows).PHP_EOL;
 }
             
 $holiday = getHoliday();
 if( mysql_num_rows($holiday) == 3) {
-    while($rows = mysql_fetch_array($holiday)) {  
+    while($rows = mysql_fetch_assoc($holiday)) {  
         print_r($rows).PHP_EOL;
     }
 }
 
 $override = getOverride();
-while($rows = mysql_fetch_array($override)) {  
+while($rows = mysql_fetch_assoc($override)) {  
     print_r($rows).PHP_EOL;
 }
 
