@@ -112,7 +112,10 @@ function getSchedule() {
                 		minute(timeOn) as minuteOn, 
                 		hour(timeOff) as hourOff, 
                 		minute(timeOff) as minuteOff,
-                		day
+                		day,
+                		heatingOn,
+                		heatingTemp,
+                		waterOn
                 FROM boiler.schedule WHERE 
                 (timeOn < '".date('G').":".date('i').":00') 
                 AND (timeOff > '".date('G').":".date('i').":00') 
