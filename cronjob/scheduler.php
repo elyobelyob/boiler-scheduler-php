@@ -19,9 +19,38 @@ $listTemp = array('therm_temp','lou_temp', 'bed1_temp');
 
 for ($i=0;$i<count($listTemp);$i++) {
     // we grab from emoncms
+    getEmonTemp($listTemp[$i]);
+}
 
-    $query = "select unix_timestamp(time) as thermTime, value as thermTemp from emoncms.feeds where name = 'therm_temp' LIMIT 1,1";
+$rows = getHoliday();
+
+if (count($rows) > 1) { 
+    // ignore schedule and override and set 24 hour to holiday temp
+    $temp = $row['temp'];
+    } else {
+
+    getSchedule();
+            
+    getOverride();
+
+}
+
+// NJB TODO
+$currentTemp = 15;
+$temp = 15;
+
+if ($currentTemp < $temp) {
+    heatingOn();
+} else { 
+    heatingOff();
+}
+
+function getEmonTemp($name) {
+    $query = "SELECT unix_timestamp(time) AS thermTime, 
+                     value AS thermTemp 
+                     FROM emoncms.feeds WHERE name = '".$name."' LIMIT 0,1";
     $result = mysql_query($query);
+    echo $query . PHP_EOL;
     print_r(mysql_error());
     
     while($row = mysql_fetch_array($result)) {  
@@ -30,27 +59,32 @@ for ($i=0;$i<count($listTemp);$i++) {
         print_r($row).PHP_EOL;
 
         // time is old, then perhaps out of batteries?
-        if ($thermTime < (date()-100) ) {
-            break;
+        if ($thermTime < (time()-100) ) {
+            return false;
+        } else {
+            return $thermTemp;
+
         }
     }
+    
+    
 }
 
-// Check holiday schedule
-$query = 'select * from boiler.configuration where `key` = "holidayFrom" AND UNIX_TIMESTAMP(value) < '.mktime();
-echo $query . PHP_EOL;
-$result = mysql_query($query);
-
-$rows = mysql_fetch_array($result);
-while($row = mysql_fetch_array($result)) {  
-    print_r($row).PHP_EOL;
+function getHoliday() {
+    // Check holiday schedule
+    $query = 'SELECT `key`, UNIX_TIMESTAMP(value) as value FROM boiler.configuration 
+                WHERE ((`key` = "holidayFrom" AND UNIX_TIMESTAMP(value) < '.mktime().') 
+                    AND (`key` = "holidayTo" AND UNIX_TIMESTAMP(value) > '.mktime().'))';
+    echo $query . PHP_EOL;
+    $result = mysql_query($query);
+    
+    while($rows = mysql_fetch_array($result)) {  
+        print_r($rows).PHP_EOL;
+    }
+    return $rows; 
 }
 
-if (count($row) > 1) { 
-    // ignore schedule and override and set 24 hour to holiday temp
-    $temp = $row['temp'];
-    } else {
-
+function getSchedule() {
     // Schedule
     //SELECT * FROM schedule WHERE 
     //          (timeOn < '06:17:00' ) 
@@ -71,7 +105,10 @@ if (count($row) > 1) {
     while($row = mysql_fetch_array($result)) {  
         print_r($row).PHP_EOL;
     }
-        
+    
+}
+
+function getOverride() {
     // Override
     // select * from override where date > 1361535136 and (date+length > 1361535136)
     // select UNIX_TIMESTAMP(date) as date, UNIX_TIMESTAMP(date+length) as datelength 
@@ -91,15 +128,10 @@ if (count($row) > 1) {
     while($row = mysql_fetch_array($result)) {  
         print_r($row).PHP_EOL;
     }
-
-
+    
 }
 
-// NJB TODO
-$currentTemp = 15;
-$temp = 15;
-
-if ($currentTemp < $temp) {
+function heatingOn() {
     //heating on
     // call url
     $ch = curl_init();
@@ -112,7 +144,11 @@ if ($currentTemp < $temp) {
     curl_exec($ch);
     // close cURL resource, and free up system resources
     curl_close($ch);
-} else { 
+    
+}
+
+function heatingOff() {
+    //heating on
     // call url
     $ch = curl_init();
     // set URL and other appropriate options
@@ -124,4 +160,5 @@ if ($currentTemp < $temp) {
     curl_exec($ch);
     // close cURL resource, and free up system resources
     curl_close($ch);
+    
 }

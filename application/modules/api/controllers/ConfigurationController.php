@@ -25,9 +25,8 @@ class Api_ConfigurationController extends Zend_Controller_Action
 	
 	public function holidaytimesAction()
 	{
-		//Must convert back from millis
-		$from = strftime("%A %d %B %H:%M", (int) ($this->_model->getConfigurationByKey("holidayFrom")->value / 1000));
-    	$to = strftime("%A %d %B %H:%M", (int) ($this->_model->getConfigurationByKey("holidayUntil")->value / 1000));
+		$from = gmdate("Y-m-d\TH:i:s\Z", (int) ($this->_model->getConfigurationByKey("holidayFrom")->value));
+    	$to = gmdate("Y-m-d\TH:i:s\Z", (int) ($this->_model->getConfigurationByKey("holidayTo")->value));
 		
 		$output['Result'] = "OK";
 		$output['Message'] = "From: $from To: $to";
@@ -35,8 +34,8 @@ class Api_ConfigurationController extends Zend_Controller_Action
 	
 		$json = Zend_Json::encode($output);
 		$this->getResponse()
-		->setHttpResponseCode(200)
-		->appendBody($json);
+    		->setHttpResponseCode(200)
+    		->appendBody($json);
 	}
 	
 	public function boostAction()
@@ -70,8 +69,8 @@ class Api_ConfigurationController extends Zend_Controller_Action
 	
 	public function holidayAction()
 	{
-		$from = strtotime($this->_getParam("from")) * 1000; //convert to milliseconds
-		$to = strtotime($this->_getParam("to")) * 1000; //convert to milliseconds
+		$from = strtotime($this->_getParam("from"));
+		$to = strtotime($this->_getParam("to"));
 	
 		$output = array();
 	
@@ -85,7 +84,7 @@ class Api_ConfigurationController extends Zend_Controller_Action
 		else {
 			$output['Result'] = "OK";
 			$this->_model->setConfiguration("holidayFrom", $from, "long");
-			$this->_model->setConfiguration("holidayUntil", $to, "long");
+			$this->_model->setConfiguration("holidayTo", $to, "long");
 		}
 		$json = Zend_Json::encode($output);
 		$this->getResponse()
