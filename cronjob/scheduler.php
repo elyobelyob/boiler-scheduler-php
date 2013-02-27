@@ -30,14 +30,16 @@ if( mysql_num_rows($data) == 3) {
     return $rows; 
 }
 
+$schedule = getSchedule();
+            
+$override = getOverride();
+
+
 if (count($rows) > 1) { 
     // ignore schedule and override and set 24 hour to holiday temp
     $temp = $row['temp'];
     } else {
 
-    getSchedule();
-            
-    getOverride();
 
 }
 
