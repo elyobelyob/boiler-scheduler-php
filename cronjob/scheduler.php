@@ -71,8 +71,6 @@ function getEmonTemp($name) {
                      value AS thermTemp 
                      FROM emoncms.feeds WHERE name = '".$name."' LIMIT 0,1";
     $result = mysql_query($query);
-    echo $query . PHP_EOL;
-    //print_r(mysql_error());
     
     while($row = mysql_fetch_array($result)) {  
         $thermTemp = $row['thermTemp'];
@@ -81,10 +79,13 @@ function getEmonTemp($name) {
 
         // time is old, then perhaps out of batteries?
         if ($thermTime < (time()-100) ) {
-            return false;
+            break;
+        } else {
+            return $result;
+            
         }
     }
-    return $result;
+    break;
 }
 
 function getHoliday() {
