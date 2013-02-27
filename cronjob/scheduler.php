@@ -3,8 +3,8 @@
 // Check whether control2drayton set
 // otherwise continue ... 
 
-
-$con = mysql_connect("192.168.121.132","dbuser","dbuser123") or die("Cannot connect mysql".PHP_EOL);
+include 'settings.php';
+$con = mysql_connect($db,$dbuser,$dbpasswd) or die("Cannot connect mysql".PHP_EOL);
 
 if (!$con)
   {
