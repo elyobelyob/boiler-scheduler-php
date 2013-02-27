@@ -19,8 +19,8 @@ $listTemp = array('therm_temp','lou_temp', 'bed1_temp');
 
 for ($i=0;$i<count($listTemp);$i++) {
     // we grab from emoncms
-    $temp = getEmonTemp($listTemp[$i]);
-    while($rows = mysql_fetch_array($temp)) {  
+    $data = getEmonTemp($listTemp[$i]);
+    while($rows = mysql_fetch_array($data)) {  
         print_r($rows).PHP_EOL;
     }
     
@@ -79,10 +79,9 @@ function getEmonTemp($name) {
         // time is old, then perhaps out of batteries?
         if ($thermTime < (time()-100) ) {
             return false;
-        } else {
-            return $result;
         }
     }
+    return $result;
 }
 
 function getHoliday() {
