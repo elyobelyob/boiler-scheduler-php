@@ -43,7 +43,6 @@ while($rows = mysql_fetch_array($override)) {
     print_r($rows).PHP_EOL;
 }
 
-
 if (count($rows) > 1) { 
     // ignore schedule and override and set 24 hour to holiday temp
     $temp = $row['temp'];
@@ -70,16 +69,15 @@ function getEmonTemp($name) {
     $query = "SELECT unix_timestamp(time) AS thermTime, 
                      value AS thermTemp 
                      FROM emoncms.feeds WHERE name = '".$name."' LIMIT 0,1";
+    //echo $query . PHP_EOL;
     $result = mysql_query($query);
     
     while($row = mysql_fetch_array($result)) {  
-        $thermTemp = $row['thermTemp'];
         $thermTime = $row['thermTime'];
-        //print_r($row).PHP_EOL;
 
         // time is old, then perhaps out of batteries?
         if ($thermTime < (time()-100) ) {
-            break;
+            return false;
         } else {
             return $result;
             
