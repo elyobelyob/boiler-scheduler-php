@@ -15,7 +15,7 @@ $currentTime = date('m/d/Y h:i:s a');
 
 //Temperature outside check .. if less than 5 degrees .. turn on 30 mins earlier?
 //move through a list of preferred temps to get latest
-$listTemp = array('therm_temp','lou_temp', 'bed1_temp');
+$listTemp = array('therm_temp','lou_temp', 'bed1_temp', 'out_temp');
 
 for ($i=0;$i<count($listTemp);$i++) {
     // we grab from emoncms
@@ -29,18 +29,18 @@ for ($i=0;$i<count($listTemp);$i++) {
     }
 }
 
-$data = getHoliday();
-if( mysql_num_rows($data) == 3) {
-    while($rows = mysql_fetch_array($data)) {  
-        print_r($rows).PHP_EOL;
-    }
-}
-
 $schedule = getSchedule();
 while($rows = mysql_fetch_array($schedule)) {  
     print_r($rows).PHP_EOL;
 }
             
+$holiday = getHoliday();
+if( mysql_num_rows($holiday) == 3) {
+    while($rows = mysql_fetch_array($holiday)) {  
+        print_r($rows).PHP_EOL;
+    }
+}
+
 $override = getOverride();
 while($rows = mysql_fetch_array($override)) {  
     print_r($rows).PHP_EOL;
@@ -79,28 +79,6 @@ function getEmonTemp($name) {
     return $result;    
 }
 
-function getHoliday() {
-    echo "checking holiday" . PHP_EOL;
-    // Check holiday schedule
-    $query = 'SELECT `key`, value FROM boiler.configuration 
-                WHERE ((`key` = "holidayFrom" AND value < '.mktime().') 
-                    OR (`key` = "holidayTo" AND value > '.mktime().')
-                    OR (`key` = "holidayTemp" AND value <> 0))';
-    //echo $query . PHP_EOL;
-    $result = mysql_query($query);
-    
-/*
-    if( mysql_num_rows($result) == 3) {
-        while($rows = mysql_fetch_array($result)) {  
-            print_r($rows).PHP_EOL;
-        }
-        return $rows; 
-    }
-*/
-    return $result; 
-
-}
-
 function getSchedule() {
     echo "checking schedule" . PHP_EOL;
     // Schedule
@@ -131,6 +109,28 @@ function getSchedule() {
 */
     return $result;
     
+}
+
+function getHoliday() {
+    echo "checking holiday" . PHP_EOL;
+    // Check holiday schedule
+    $query = 'SELECT `key`, value FROM boiler.configuration 
+                WHERE ((`key` = "holidayFrom" AND value < '.mktime().') 
+                    OR (`key` = "holidayTo" AND value > '.mktime().')
+                    OR (`key` = "holidayTemp" AND value <> 0))';
+    //echo $query . PHP_EOL;
+    $result = mysql_query($query);
+    
+/*
+    if( mysql_num_rows($result) == 3) {
+        while($rows = mysql_fetch_array($result)) {  
+            print_r($rows).PHP_EOL;
+        }
+        return $rows; 
+    }
+*/
+    return $result; 
+
 }
 
 function getOverride() {
