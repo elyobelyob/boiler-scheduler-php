@@ -27,12 +27,17 @@ if( mysql_num_rows($data) == 3) {
     while($rows = mysql_fetch_array($data)) {  
         print_r($rows).PHP_EOL;
     }
-    return $rows; 
 }
 
 $schedule = getSchedule();
+while($rows = mysql_fetch_array($schedule)) {  
+    print_r($rows).PHP_EOL;
+}
             
 $override = getOverride();
+while($rows = mysql_fetch_array($override)) {  
+    print_r($rows).PHP_EOL;
+}
 
 
 if (count($rows) > 1) { 
