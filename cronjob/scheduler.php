@@ -19,7 +19,11 @@ $listTemp = array('therm_temp','lou_temp', 'bed1_temp');
 
 for ($i=0;$i<count($listTemp);$i++) {
     // we grab from emoncms
-    getEmonTemp($listTemp[$i]);
+    $temp = getEmonTemp($listTemp[$i]);
+    while($rows = mysql_fetch_array($temp)) {  
+        print_r($rows).PHP_EOL;
+    }
+    
 }
 
 $data = getHoliday();
@@ -64,7 +68,7 @@ function getEmonTemp($name) {
                      value AS thermTemp 
                      FROM emoncms.feeds WHERE name = '".$name."' LIMIT 0,1";
     $result = mysql_query($query);
-    echo $query . PHP_EOL;
+    //echo $query . PHP_EOL;
     //print_r(mysql_error());
     
     while($row = mysql_fetch_array($result)) {  
@@ -76,7 +80,7 @@ function getEmonTemp($name) {
         if ($thermTime < (time()-100) ) {
             return false;
         } else {
-            return $thermTemp;
+            return $result;
         }
     }
 }
