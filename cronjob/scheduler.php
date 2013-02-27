@@ -62,13 +62,16 @@ if ($currentTemp < $temp) {
     heatingOff();
 }
 
+
+// Main Functions
+
 function getEmonTemp($name) {
     echo "checking temps" . PHP_EOL;
     $query = "SELECT unix_timestamp(time) AS thermTime, 
                      value AS thermTemp 
                      FROM emoncms.feeds WHERE name = '".$name."' LIMIT 0,1";
     $result = mysql_query($query);
-    //echo $query . PHP_EOL;
+    echo $query . PHP_EOL;
     //print_r(mysql_error());
     
     while($row = mysql_fetch_array($result)) {  
