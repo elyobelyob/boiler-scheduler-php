@@ -22,15 +22,10 @@ for ($i=0;$i<count($listTemp);$i++) {
     if ($data = getEmonTemp($listTemp[$i])) {
 
     	while($rows = mysql_fetch_array($data)) {  
-            $thermTime = $rows['thermTime'];
-            // time is old, then perhaps out of batteries?
-            if ($thermTime < (time()-100) ) {
-                return false;
-            } else {
-                return $result;
-            }
-    	print_r($rows).PHP_EOL;
+        	print_r($rows).PHP_EOL;
     	}
+
+
     }
 }
 
