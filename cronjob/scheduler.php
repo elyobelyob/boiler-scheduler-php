@@ -69,7 +69,8 @@ if ($currentTemp < $temp) {
 
 function getEmonTemp($name) {
     echo "checking temps" . PHP_EOL;
-    $query = "SELECT unix_timestamp(time) AS thermTime, 
+    $query = "SELECT name,
+                     unix_timestamp(time) AS thermTime, 
                      value AS thermTemp 
                      FROM emoncms.feeds WHERE name = '".$name."' LIMIT 0,1";
     //echo $query . PHP_EOL;
