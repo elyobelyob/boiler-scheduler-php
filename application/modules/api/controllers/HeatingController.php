@@ -48,7 +48,7 @@ class Api_HeatingController extends Zend_Controller_Action
 		$output = $this->_model->getStatus();
 
 		$this->getResponse()
-		->setHttpResponseCode(200)
-		->appendBody($output);
+    		->setHttpResponseCode(200)
+    		->appendBody($output);
 	}
 }

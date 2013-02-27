@@ -22,7 +22,13 @@ for ($i=0;$i<count($listTemp);$i++) {
     getEmonTemp($listTemp[$i]);
 }
 
-$rows = getHoliday();
+$data = getHoliday();
+if( mysql_num_rows($data) == 3) {
+    while($rows = mysql_fetch_array($data)) {  
+        print_r($rows).PHP_EOL;
+    }
+    return $rows; 
+}
 
 if (count($rows) > 1) { 
     // ignore schedule and override and set 24 hour to holiday temp
@@ -50,38 +56,42 @@ function getEmonTemp($name) {
                      value AS thermTemp 
                      FROM emoncms.feeds WHERE name = '".$name."' LIMIT 0,1";
     $result = mysql_query($query);
-    echo $query . PHP_EOL;
-    print_r(mysql_error());
+    //echo $query . PHP_EOL;
+    //print_r(mysql_error());
     
     while($row = mysql_fetch_array($result)) {  
         $thermTemp = $row['thermTemp'];
         $thermTime = $row['thermTime'];
-        print_r($row).PHP_EOL;
+        //print_r($row).PHP_EOL;
 
         // time is old, then perhaps out of batteries?
         if ($thermTime < (time()-100) ) {
             return false;
         } else {
             return $thermTemp;
-
         }
     }
-    
-    
 }
 
 function getHoliday() {
     // Check holiday schedule
-    $query = 'SELECT `key`, UNIX_TIMESTAMP(value) as value FROM boiler.configuration 
-                WHERE ((`key` = "holidayFrom" AND UNIX_TIMESTAMP(value) < '.mktime().') 
-                    AND (`key` = "holidayTo" AND UNIX_TIMESTAMP(value) > '.mktime().'))';
-    echo $query . PHP_EOL;
+    $query = 'SELECT `key`, value FROM boiler.configuration 
+                WHERE ((`key` = "holidayFrom" AND value < '.mktime().') 
+                    OR (`key` = "holidayTo" AND value > '.mktime().')
+                    OR (`key` = "holidayTemp" AND value <> 0))';
+    //echo $query . PHP_EOL;
     $result = mysql_query($query);
     
-    while($rows = mysql_fetch_array($result)) {  
-        print_r($rows).PHP_EOL;
+/*
+    if( mysql_num_rows($result) == 3) {
+        while($rows = mysql_fetch_array($result)) {  
+            print_r($rows).PHP_EOL;
+        }
+        return $rows; 
     }
-    return $rows; 
+*/
+    return $result; 
+
 }
 
 function getSchedule() {
@@ -99,12 +109,15 @@ function getSchedule() {
                 (timeOn < '".date('G').":".date('i').":00') 
                 AND (timeOff > '".date('G').":".date('i').":00') 
                 AND day = ".date('N');
-    echo $query.PHP_EOL;
+    //echo $query.PHP_EOL;
     $result = mysql_query($query);
     
+/*
     while($row = mysql_fetch_array($result)) {  
         print_r($row).PHP_EOL;
     }
+*/
+    return $result;
     
 }
 
@@ -122,13 +135,15 @@ function getOverride() {
                 FROM boiler.override WHERE 
                     UNIX_TIMESTAMP(date) < ".mktime()." 
                     AND (UNIX_TIMESTAMP(date + INTERVAL length MINUTE) > ".mktime().")";
-    echo $query.PHP_EOL;
+    //echo $query.PHP_EOL;
     $result = mysql_query($query) or die(mysql_error());
 
+/*
     while($row = mysql_fetch_array($result)) {  
         print_r($row).PHP_EOL;
     }
-    
+*/
+    return $result;
 }
 
 function heatingOn() {

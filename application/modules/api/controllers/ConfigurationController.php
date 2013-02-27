@@ -25,8 +25,8 @@ class Api_ConfigurationController extends Zend_Controller_Action
 	
 	public function holidaytimesAction()
 	{
-		$from = gmdate("Y-m-d\TH:i:s\Z", (int) ($this->_model->getConfigurationByKey("holidayFrom")->value));
-    	$to = gmdate("Y-m-d\TH:i:s\Z", (int) ($this->_model->getConfigurationByKey("holidayTo")->value));
+		$from = strftime("%A %d %B %H:%M", (int) ($this->_model->getConfigurationByKey("holidayFrom")->value));
+    	$to = strftime("%A %d %B %H:%M", (int) ($this->_model->getConfigurationByKey("holidayTo")->value));
 		
 		$output['Result'] = "OK";
 		$output['Message'] = "From: $from To: $to";
