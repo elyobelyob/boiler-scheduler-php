@@ -85,7 +85,7 @@ function getEmonTemp($name) {
             
         }
     }
-    break;
+    
 }
 
 function getHoliday() {
