@@ -59,11 +59,12 @@ if ($currentTemp < $temp) {
 }
 
 function getEmonTemp($name) {
+    echo "checking temps" . PHP_EOL;
     $query = "SELECT unix_timestamp(time) AS thermTime, 
                      value AS thermTemp 
                      FROM emoncms.feeds WHERE name = '".$name."' LIMIT 0,1";
     $result = mysql_query($query);
-    //echo $query . PHP_EOL;
+    echo $query . PHP_EOL;
     //print_r(mysql_error());
     
     while($row = mysql_fetch_array($result)) {  
@@ -81,6 +82,7 @@ function getEmonTemp($name) {
 }
 
 function getHoliday() {
+    echo "checking holiday" . PHP_EOL;
     // Check holiday schedule
     $query = 'SELECT `key`, value FROM boiler.configuration 
                 WHERE ((`key` = "holidayFrom" AND value < '.mktime().') 
@@ -102,6 +104,7 @@ function getHoliday() {
 }
 
 function getSchedule() {
+    echo "checking schedule" . PHP_EOL;
     // Schedule
     //SELECT * FROM schedule WHERE 
     //          (timeOn < '06:17:00' ) 
@@ -133,6 +136,7 @@ function getSchedule() {
 }
 
 function getOverride() {
+    echo "checking override" . PHP_EOL;
     // Override
     // select * from override where date > 1361535136 and (date+length > 1361535136)
     // select UNIX_TIMESTAMP(date) as date, UNIX_TIMESTAMP(date+length) as datelength 
