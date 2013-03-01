@@ -11,7 +11,7 @@ if (!$con)
   die('Could not connect: ' . mysql_error());
   }
 
-$currentTime = date('m/d/Y h:i:s a');
+$heatingStatus = 0;
 
 //Temperature outside check .. if less than 5 degrees .. turn on 30 mins earlier?
 //move through a list of preferred temps to get latest
@@ -23,14 +23,15 @@ for ($i=0;$i<count($listTemp);$i++) {
 
     	while($rows = mysql_fetch_assoc($data)) {  
         	print_r($rows).PHP_EOL;
+        	if (count($rows) > 0) { break; }
     	}
-
 
     }
 }
 
 $schedule = getSchedule();
-while($rows = mysql_fetch_assoc($schedule)) {  
+while($rows = mysql_fetch_assoc($schedule)) {
+    $heatingStatus = 1;
     print_r($rows).PHP_EOL;
 }
             
@@ -46,24 +47,16 @@ while($rows = mysql_fetch_assoc($override)) {
     print_r($rows).PHP_EOL;
 }
 
+setHeating();
+
+/*
 if (count($rows) > 1) { 
     // ignore schedule and override and set 24 hour to holiday temp
     $temp = $row['temp'];
     } else {
 
-
 }
-
-// NJB TODO
-$currentTemp = 15;
-$temp = 15;
-
-if ($currentTemp < $temp) {
-    heatingOn();
-} else { 
-    heatingOff();
-}
-
+*/
 
 // Main Functions
 
@@ -86,7 +79,6 @@ function getSchedule() {
     //          (timeOn < '06:17:00' ) 
     //          AND (timeOff > '06:17:00' ) 
     //          AND day = 5
-                    
     $query = "SELECT    hour(timeOn) as hourOn, 
                 		minute(timeOn) as minuteOn, 
                 		hour(timeOff) as hourOff, 
@@ -98,8 +90,8 @@ function getSchedule() {
                 FROM boiler.schedule WHERE 
                 (timeOn < '".date('G').":".date('i').":00') 
                 AND (timeOff > '".date('G').":".date('i').":00') 
-                AND day = ".date('N');
-    //echo $query.PHP_EOL;
+                AND day = ".(date('N')+1);  
+    echo $query.PHP_EOL;
     $result = mysql_query($query);
     
 /*
@@ -159,7 +151,32 @@ function getOverride() {
     return $result;
 }
 
-function heatingOn() {
+function checkHeatingTemp() {
+    // check whether current temp < target temp    
+    // NJB TODO
+    global $heatingStatus;
+    $currentTemp = 15;
+    $temp = 15;
+    
+    if ($currentTemp < $temp) {
+        $heatingStatus = 1;
+    } else { 
+        $heatingStatus = 0;
+    }
+}
+
+function setHeating() {
+    global $heatingStatus;
+    if ($heatingStatus) {
+        $heatingAction = setHeatingOn();
+        echo $heatingAction. PHP_EOL;
+    } else {
+        $heatingAction = setHeatingOff();
+        echo $heatingAction. PHP_EOL;
+    }
+}
+
+function setHeatingOn() {
     //heating on
     // call url
     $ch = curl_init();
@@ -168,6 +185,9 @@ function heatingOn() {
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
     curl_setopt($ch, CURLOPT_TIMEOUT_MS, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_VERBOSE, 1);
+    curl_setopt($ch, CURLOPT_HEADER, 1);
     // grab URL and pass it to the browser
     curl_exec($ch);
     // close cURL resource, and free up system resources
@@ -175,7 +195,7 @@ function heatingOn() {
     
 }
 
-function heatingOff() {
+function setHeatingOff() {
     //heating on
     // call url
     $ch = curl_init();
@@ -184,9 +204,14 @@ function heatingOff() {
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
     curl_setopt($ch, CURLOPT_TIMEOUT_MS, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_VERBOSE, 1);
+    curl_setopt($ch, CURLOPT_HEADER, 1);    
     // grab URL and pass it to the browser
     curl_exec($ch);
     // close cURL resource, and free up system resources
     curl_close($ch);
     
 }
+
+
