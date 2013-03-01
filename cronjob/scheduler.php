@@ -11,17 +11,20 @@ if (!$con)
   die('Could not connect: ' . mysql_error());
   }
 
+// initially set heating off
 $heatingStatus = 0;
 
 //Temperature outside check .. if less than 5 degrees .. turn on 30 mins earlier?
 //move through a list of preferred temps to get latest
-$listTemp = array('therm_temp','lou_temp', 'bed1_temp', 'out_temp');
+//$listTemp = array('therm_temp','lou_temp', 'bed1_temp', 'out_temp');
+$listTemp = array('lou_temp');
 
 for ($i=0;$i<count($listTemp);$i++) {
     // we grab from emoncms
     if ($data = getEmonTemp($listTemp[$i])) {
 
-    	while($rows = mysql_fetch_assoc($data)) {  
+    	while($rows = mysql_fetch_assoc($data)) {
+    	    $currentTemp = $rows['thermTemp'];
         	print_r($rows).PHP_EOL;
         	if (count($rows) > 0) { break; }
     	}
@@ -32,20 +35,27 @@ for ($i=0;$i<count($listTemp);$i++) {
 $schedule = getSchedule();
 while($rows = mysql_fetch_assoc($schedule)) {
     $heatingStatus = 1;
+    $heatingTemp = $rows['heatingTemp'];
     print_r($rows).PHP_EOL;
 }
             
 $holiday = getHoliday();
 if( mysql_num_rows($holiday) == 3) {
-    while($rows = mysql_fetch_assoc($holiday)) {  
+    while($rows = mysql_fetch_assoc($holiday)) {
+        $heatingStatus = 1;
+        $heatingTemp = 8;
         print_r($rows).PHP_EOL;
     }
 }
 
 $override = getOverride();
-while($rows = mysql_fetch_assoc($override)) {  
+while($rows = mysql_fetch_assoc($override)) {
+    $heatingStatus = 1;
+    $heatingTemp = 8;
     print_r($rows).PHP_EOL;
 }
+
+checkHeatingTemp();
 
 setHeating();
 
@@ -91,7 +101,7 @@ function getSchedule() {
                 (timeOn < '".date('G').":".date('i').":00') 
                 AND (timeOff > '".date('G').":".date('i').":00') 
                 AND day = ".(date('N')+1);  
-    echo $query.PHP_EOL;
+    //echo $query.PHP_EOL;
     $result = mysql_query($query);
     
 /*
@@ -154,13 +164,13 @@ function getOverride() {
 function checkHeatingTemp() {
     // check whether current temp < target temp    
     // NJB TODO
-    global $heatingStatus;
-    $currentTemp = 15;
-    $temp = 15;
+    global $heatingStatus, $heatingTemp, $currentTemp;
     
-    if ($currentTemp < $temp) {
+    if ($currentTemp < $heatingTemp) {
+        echo $currentTemp . " less than ".$heatingTemp." - switch on";
         $heatingStatus = 1;
     } else { 
+        echo $currentTemp . " more than ".$heatingTemp." - switch off";
         $heatingStatus = 0;
     }
 }
@@ -168,9 +178,11 @@ function checkHeatingTemp() {
 function setHeating() {
     global $heatingStatus;
     if ($heatingStatus) {
+        echo "Switch Heating On" . PHP_EOL;
         $heatingAction = setHeatingOn();
         echo $heatingAction. PHP_EOL;
     } else {
+        echo "Switch Heating Off" . PHP_EOL;
         $heatingAction = setHeatingOff();
         echo $heatingAction. PHP_EOL;
     }
@@ -184,7 +196,6 @@ function setHeatingOn() {
     curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.90/heating/heatingon.php');
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT_MS, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_VERBOSE, 1);
     curl_setopt($ch, CURLOPT_HEADER, 1);
@@ -203,7 +214,6 @@ function setHeatingOff() {
     curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.90/heating/heatingoff.php');
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT_MS, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_VERBOSE, 1);
     curl_setopt($ch, CURLOPT_HEADER, 1);    
