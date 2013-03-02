@@ -13,6 +13,7 @@ if (!$con)
 
 // initially set heating off
 $heatingStatus = 0;
+$heatingTemp = 8;
 
 //Temperature outside check .. if less than 5 degrees .. turn on 30 mins earlier?
 //move through a list of preferred temps to get latest
@@ -51,11 +52,15 @@ if( mysql_num_rows($holiday) == 3) {
 $override = getOverride();
 while($rows = mysql_fetch_assoc($override)) {
     $heatingStatus = 1;
-    $heatingTemp = 8;
+    $heatingTemp = $rows['heatingTemp'];
     print_r($rows).PHP_EOL;
 }
 
-checkHeatingTemp();
+if ($heatingStatus) {
+        checkHeatingTemp();
+    } else {
+        echo "Heating not requested by any process". PHP_EOL;
+    }
 
 setHeating();
 
@@ -146,7 +151,8 @@ function getOverride() {
                         UNIX_TIMESTAMP(date + INTERVAL length MINUTE) as datelength, 
                         type,
                         date,
-                        length 
+                        length,
+			heatingTemp
                 FROM boiler.override WHERE 
                     UNIX_TIMESTAMP(date) < ".mktime()." 
                     AND (UNIX_TIMESTAMP(date + INTERVAL length MINUTE) > ".mktime().")";
@@ -167,10 +173,10 @@ function checkHeatingTemp() {
     global $heatingStatus, $heatingTemp, $currentTemp;
     
     if ($currentTemp < $heatingTemp) {
-        echo $currentTemp . " less than ".$heatingTemp." - switch on";
+        echo $currentTemp . " less than ".$heatingTemp." - switch on" . PHP_EOL;
         $heatingStatus = 1;
     } else { 
-        echo $currentTemp . " more than ".$heatingTemp." - switch off";
+        echo $currentTemp . " more than ".$heatingTemp." - switch off" . PHP_EOL;
         $heatingStatus = 0;
     }
 }
