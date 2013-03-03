@@ -10,9 +10,9 @@ class Elyob_Resource_Heating extends SF_Model_Resource_Socket_Abstract
 		$this->_host = Zend_Registry::getInstance()->constants->SERVER_HOST;
 	}
 
-	public function setBoostHeating($time)
+	public function setBoostHeating($time,$temp)
 	{
-		return $this->send("boost:heating,time:$time");
+		return $this->send("boost:heating,time:$time,temp:$temp");
 	}
 	
 	public function setBoostWater($time)

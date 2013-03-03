@@ -12,9 +12,9 @@ class Api_HeatingController extends Zend_Controller_Action
 
 	public function boostAction()
 	{
-		
 		$data = $this->_getParam('toggle');
 		$time = $this->_getParam('time');
+		$temp = $this->_getParam('temp');
 		$key = "";
 	
 		$output = array();
@@ -25,7 +25,7 @@ class Api_HeatingController extends Zend_Controller_Action
 			$output['Result'] = "ERROR";
 			$output['Message'] = "Incorrect request method";
 		} else if ($data == "heating") {
-			$output = $this->_model->setBoostHeating($time);
+			$output = $this->_model->setBoostHeating($time,$temp);
 		} else if ($data == "water") {
 			$output = $this->_model->setBoostWater($time);
 		} else {

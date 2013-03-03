@@ -27,10 +27,19 @@
     <label for="heatTime">Boost Time:</label>
     <select name="time" id="heatTime">
     	<?php 
-    	$default = 60;
-    	for ($i = 10; $i <= 180; $i = $i + 10) :
+    	$default = 180;
+    	for ($i = 15; $i <= 360; $i = $i + 15) :
     	?>
     	<option value="<?php echo $i?>" <?php if ($i == $default) echo 'selected="selected"'?>><?php echo $i?> minutes</option>
+    	<?php endfor; ?>
+    </select>
+    <label for="heatTime">Boost Temp:</label>
+    <select name="temp" id="heatTemp">
+    	<?php 
+    	$default = 18;
+    	for ($i = 0; $i <= 26; $i = $i + 2) :
+    	?>
+    	<option value="<?php echo $i?>" <?php if ($i == $default) echo 'selected="selected"'?>><?php echo $i?>&deg;</option>
     	<?php endfor; ?>
     </select>
   </fieldset>

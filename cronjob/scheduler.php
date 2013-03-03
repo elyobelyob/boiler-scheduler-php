@@ -4,6 +4,19 @@
 // otherwise continue ... 
 
 include 'settings.php';
+
+// get contents of a file into a string
+$filename = "control2drayton.txt";
+$handle = fopen($filename, "r");
+$contents = fread($handle, filesize($filename));
+fclose($handle);
+
+if ($contents) {
+    echo "Control back to Drayton" . PHP_EOL;
+    control2drayton();
+    exit;
+}
+
 $con = mysql_connect($db,$dbuser,$dbpasswd) or die("Cannot connect mysql".PHP_EOL);
 
 if (!$con)
@@ -223,6 +236,24 @@ function setHeatingOff() {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_VERBOSE, 1);
     curl_setopt($ch, CURLOPT_HEADER, 1);    
+    // grab URL and pass it to the browser
+    curl_exec($ch);
+    // close cURL resource, and free up system resources
+    curl_close($ch);
+    
+}
+
+function control2drayton() {
+    //heating on
+    // call url
+    $ch = curl_init();
+    // set URL and other appropriate options
+    curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.90/heating/control2drayton.php');
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_VERBOSE, 1);
+    curl_setopt($ch, CURLOPT_HEADER, 1);
     // grab URL and pass it to the browser
     curl_exec($ch);
     // close cURL resource, and free up system resources

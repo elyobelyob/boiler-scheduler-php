@@ -55,7 +55,7 @@ function checkStatus() {
 }
 $(document).ready(checkStatus());
 
-function setupDialog(dialogId, postName, timeId, buttonId) {
+function setupDialog(dialogId, postName, timeId, tempId, buttonId) {
     $( dialogId ).dialog({
         autoOpen: false,
         height: 150,
@@ -63,8 +63,7 @@ function setupDialog(dialogId, postName, timeId, buttonId) {
         modal: true,
         buttons: {
           "Toggle": function() {
-        	  $.post("/api/heating/boost/toggle/" + postName +"/time/" + 
-        			  $(timeId).val(), function(json) {
+        	  $.post("/api/heating/boost/toggle/" + postName +"/time/" + $(timeId).val() +"/temp/" + $(tempId).val(), function(json) {
       			if (json.Result == "OK") {
       				updateImages(json);
       			} else {
@@ -94,6 +93,6 @@ function setupDialog(dialogId, postName, timeId, buttonId) {
 }
 
 $(document).ready(function() {
-	setupDialog("#heating-boost-dialog", "heating", "#heatTime", "#heatingBoost");
+	setupDialog("#heating-boost-dialog", "heating", "#heatTime", "#heatTemp", "#heatingBoost");
 	setupDialog("#water-boost-dialog", "water", "#waterTime", "#waterBoost");
 });
