@@ -6,7 +6,7 @@
 include 'settings.php';
 
 // get contents of a file into a string
-$filename = "control2drayton.txt";
+$filename = realpath(dirname(__FILE__) . "/control2drayton.txt");
 $handle = fopen($filename, "r");
 $contents = fread($handle, filesize($filename));
 fclose($handle);
