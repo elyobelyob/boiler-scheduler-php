@@ -107,6 +107,8 @@ function getSchedule() {
     //          (timeOn < '06:17:00' ) 
     //          AND (timeOff > '06:17:00' ) 
     //          AND day = 5
+    $date = (date('N')+1);
+    if ($date > 7) {$date = 1};
     $query = "SELECT    hour(timeOn) as hourOn, 
                 		minute(timeOn) as minuteOn, 
                 		hour(timeOff) as hourOff, 
@@ -118,7 +120,7 @@ function getSchedule() {
                 FROM boiler.schedule WHERE 
                 (timeOn < '".date('G').":".date('i').":00') 
                 AND (timeOff > '".date('G').":".date('i').":00') 
-                AND day = ".(date('N')+1);  
+                AND day = ".$date;  
     //echo $query.PHP_EOL;
     $result = mysql_query($query);
     
