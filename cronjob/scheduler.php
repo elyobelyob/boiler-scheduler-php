@@ -11,7 +11,7 @@ $handle = fopen($filename, "r");
 $contents = fread($handle, filesize($filename));
 fclose($handle);
 
-if ($contents) {
+if ($contents == 1) {
     echo "Control back to Drayton" . PHP_EOL;
     control2drayton();
     exit;
