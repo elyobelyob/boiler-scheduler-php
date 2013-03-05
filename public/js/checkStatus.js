@@ -63,7 +63,7 @@ function setupDialog(dialogId, postName, timeId, tempId, buttonId) {
         modal: true,
         buttons: {
           "Toggle": function() {
-        	  $.post("/api/heating/boost/toggle/" + postName +"/time/" + $(timeId).val() +"/temp/" + $(tempId).val(), function(json) {
+        	  $.post("/api/override/boost/toggle/" + postName +"/time/" + $(timeId).val() +"/temp/" + $(tempId).val(), function(json) {
       			if (json.Result == "OK") {
       				updateImages(json);
       			} else {

@@ -80,7 +80,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->_view->headScript()->appendFile('/js/jquery-1.8.0.min.js');
         $this->_view->headScript()->appendFile('/js/jquery-ui-1.8.23.custom.min.js');
         $this->_view->headScript()->appendFile('/js/jtable/jquery.jtable.min.js');
-        $this->_view->headLink()->appendStylesheet('/js/jtable/themes/lightcolor/orange/jtable.css');
+        $this->_view->headLink()->appendStylesheet('/js/jtable/themes/lightcolor/blue/jtable.css');
         $this->_view->headLink()->appendStylesheet('/js/jquery-ui/css/ui-lightness/jquery-ui-1.8.23.custom.css');
 
         // setting the site in the title

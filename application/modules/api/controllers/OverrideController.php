@@ -1,5 +1,5 @@
 <?php
-class Api_HeatingController extends Zend_Controller_Action
+class Api_OverrideController extends Zend_Controller_Action
 {
 	protected $_model;
 	
@@ -7,7 +7,7 @@ class Api_HeatingController extends Zend_Controller_Action
 	{
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender();
-		$this->_model = new Elyob_Model_Heating();
+		$this->_model = new Elyob_Model_Override();
 	}
 
 	public function boostAction()
@@ -29,22 +29,24 @@ class Api_HeatingController extends Zend_Controller_Action
 		} else if ($data == "heating") {
             $data = array(
                 'type'          => 'type',
-                'date'          => date('Y-m-d H:m:s'),
+                'date'          => date('Y-m-d H:i:s'),
                 'length'        => $time,
                 'boost'         => 1,
                 'enabled'       => 1,
                 'heatingTemp'   => $temp
             );
-            
             $override = new Elyob_Model_Override();
-            $override->createRow();
-             
+            $override->createRow($data);
+            
+/*
             // Set column values as appropriate for your application
-            $override->date = date('Y-m-d H:m:s');
+            $override->date = date('Y-m-d H:i:s');
             $override->length = $temp;
+            $override->heatingTemp = $temp;
+*/
              
             // INSERT the new row to the database
-            $override->save();   
+            //$override->save();   
 			//$output = $this->_model->setBoostHeating($time,$temp);
 		} else if ($data == "water") {
 			$output = $this->_model->setBoostWater($time);
