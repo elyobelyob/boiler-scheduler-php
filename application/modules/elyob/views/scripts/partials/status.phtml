@@ -28,7 +28,7 @@
     <select name="time" id="heatTime">
     	<?php 
     	$default = 180;
-    	for ($i = 15; $i <= 360; $i = $i + 15) :
+    	for ($i = 0; $i <= 360; $i = $i + 15) :
     	?>
     	<option value="<?php echo $i?>" <?php if ($i == $default) echo 'selected="selected"'?>><?php echo $i?> minutes</option>
     	<?php endfor; ?>
