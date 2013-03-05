@@ -172,7 +172,8 @@ function getOverride() {
 			heatingTemp
                 FROM boiler.override WHERE 
                     UNIX_TIMESTAMP(date) < ".mktime()." 
-                    AND (UNIX_TIMESTAMP(date + INTERVAL length MINUTE) > ".mktime().")";
+                    AND (UNIX_TIMESTAMP(date + INTERVAL length MINUTE) > ".mktime().")
+                    ORDER BY id DESC LIMIT 1; ";
     //echo $query.PHP_EOL;
     $result = mysql_query($query) or die(mysql_error());
 
