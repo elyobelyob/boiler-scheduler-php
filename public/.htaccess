@@ -11,7 +11,7 @@ RewriteRule ^.*$ /index.php [NC,L]
 
 AuthName "Authorized Users Only."
 AuthType Basic
-AuthUserFile /var/www/boiler-scheduler/public/.htpasswd
+AuthUserFile /var/www/boiler-scheduler/.htpasswd
 
 #generate extra passwords here
 #http://davidwalsh.name/web-development-tools
