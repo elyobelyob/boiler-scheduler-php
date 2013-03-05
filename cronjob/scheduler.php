@@ -5,6 +5,8 @@
 
 include 'settings.php';
 
+echo date("d/m/y G.i:s", time()) . PHP_EOL . PHP_EOL;
+
 // get contents of a file into a string
 $filename = realpath(dirname(__FILE__) . "/control2drayton.txt");
 $handle = fopen($filename, "r");
