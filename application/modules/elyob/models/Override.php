@@ -1,5 +1,5 @@
 <?php
-class Elyob_Model_Override extends Zend_Db_Table_Abstract
+class Elyob_Model_Override extends Zend_Db_Table
 {	
 
     protected $_name = 'override';
@@ -8,6 +8,7 @@ class Elyob_Model_Override extends Zend_Db_Table_Abstract
         
     }
 
+/*
 	public function addBoostHeating($time,$temp)
 	{
 
@@ -28,7 +29,9 @@ class Elyob_Model_Override extends Zend_Db_Table_Abstract
 		return "Heating Boosted";
 		//return $this->getResource('Heating')->setBoostHeating($time,$temp);
 	}
+*/
 	
+/*
 	public function createRow($data)
 	{
         $data = array(
@@ -41,6 +44,7 @@ class Elyob_Model_Override extends Zend_Db_Table_Abstract
         );
         $this->insert($data);    	
 	}
+*/
 	
 	public function setBoostWater($time)
 	{

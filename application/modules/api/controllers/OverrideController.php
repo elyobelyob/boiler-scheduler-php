@@ -27,6 +27,16 @@ class Api_OverrideController extends Zend_Controller_Action
 			$output['Message'] = "Incorrect request method";
 */
 		} else if ($data == "heating") {
+		
+            $override = new Elyob_Model_Override();
+
+            $data = array(
+                'enabled'      => '0'
+            );
+            $where = array();
+            
+            $override->update($data,$where);
+
             $data = array(
                 'type'          => 'type',
                 'date'          => date('Y-m-d H:i:s'),
@@ -35,8 +45,7 @@ class Api_OverrideController extends Zend_Controller_Action
                 'enabled'       => 1,
                 'heatingTemp'   => $temp
             );
-            $override = new Elyob_Model_Override();
-            $override->createRow($data);
+            $override->insert($data);
             
 /*
             // Set column values as appropriate for your application
