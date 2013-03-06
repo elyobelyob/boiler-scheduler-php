@@ -1,6 +1,6 @@
 boiler-control-php
 ==================
-The frontend to the boiler control program (https://github.com/james-jaynne/boiler-control).
+The frontend to the boiler control program forked from (https://github.com/james-jaynne/boiler-control-php).
 
 This requires the Zend Framework (http://framework.zend.com/) installed to run.
 
@@ -8,9 +8,8 @@ For support please use this Raspberry Pi forum thread http://www.raspberrypi.org
 
 Install Instructions
 ==================
-This is a two stage process as the program is in two parts - a web frontend and a java program that does the actual controlling. The control is in java as I felt it was more stable for a long running process that I want 100% uptime on like my heating!
 
-You could do a more simple version of this without the java part running from cron jobs or something but my controller has a 16x2 lcd and buttons to manually boost the heating so needed something to control them.
+These install instructions are being updated and were more applicable to the original author's README file ... mainly should be ok though.
 
 Update your Pi and install apache, mysql and phpmyadmin
 
