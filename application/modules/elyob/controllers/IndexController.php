@@ -13,7 +13,7 @@ class Elyob_IndexController extends Zend_Controller_Action
     {    	
     	$this->view->headScript()->appendFile('/js/clock.js');
     	$this->view->headScript()->appendFile('/js/checkStatus.js');
-    	$this->view->headTitle('Schedules');
+    	$this->view->headTitle('Index');
     	
 /*
     	$_model = new Elyob_Model_Configuration();
