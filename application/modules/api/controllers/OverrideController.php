@@ -30,6 +30,7 @@ class Api_OverrideController extends Zend_Controller_Action
 		
             $override = new Elyob_Model_Override();
 
+            // remove old entries by dis-enabling them
             $data = array(
                 'enabled'      => '0'
             );
@@ -37,6 +38,7 @@ class Api_OverrideController extends Zend_Controller_Action
             
             $override->update($data,$where);
 
+            // Now add the new row
             $data = array(
                 'type'          => 'heat',
                 'date'          => date('Y-m-d H:i:s'),

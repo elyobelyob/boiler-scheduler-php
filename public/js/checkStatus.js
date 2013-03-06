@@ -1,3 +1,4 @@
+/*
 function updateImages(json) {
 	//Heating
 	if (json.Heating == "ON") {
@@ -42,11 +43,12 @@ function updateImages(json) {
 		$('#waterBoostTime').html("");
 	}
 }
+*/
 
 function checkStatus() {
 	$.getJSON("/api/heating/status/", function(json) {
 		if(json.Result == "OK") {
-			updateImages(json);
+			/* updateImages(json); */
 		} else {
 			alert(json.Message);
 		}
@@ -65,7 +67,7 @@ function setupDialog(dialogId, postName, timeId, tempId, buttonId) {
           "Toggle": function() {
         	  $.post("/api/override/boost/toggle/" + postName +"/time/" + $(timeId).val() +"/temp/" + $(tempId).val(), function(json) {
       			if (json.Result == "OK") {
-      				updateImages(json);
+/*       				updateImages(json); */
       			} else {
       				$dialog.html("Oops something went wrong");
       			}

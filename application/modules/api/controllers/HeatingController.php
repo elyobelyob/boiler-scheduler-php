@@ -28,7 +28,7 @@ class Api_HeatingController extends Zend_Controller_Action
 */
 		} else if ($data == "heating") {
             $data = array(
-                'type'          => 'type',
+                'type'          => 'heat',
                 'date'          => date('Y-m-d H:m:s'),
                 'length'        => $time,
                 'boost'         => 1,
