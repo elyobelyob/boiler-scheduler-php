@@ -38,7 +38,7 @@ class Api_OverrideController extends Zend_Controller_Action
             $override->update($data,$where);
 
             $data = array(
-                'type'          => 'type',
+                'type'          => 'heat',
                 'date'          => date('Y-m-d H:i:s'),
                 'length'        => $time,
                 'boost'         => 1,
