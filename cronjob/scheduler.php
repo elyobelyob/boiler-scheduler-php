@@ -196,7 +196,7 @@ function checkHeatingTemp() {
         echo $currentTemp . " less than ".$heatingTemp." - switch on" . PHP_EOL;
         $heatingStatus = 1;
     } else { 
-        echo $currentTemp . " more than ".$heatingTemp." - switch off" . PHP_EOL;
+        echo $currentTemp . " more than or equal to ".$heatingTemp." - switch off" . PHP_EOL;
         $heatingStatus = 0;
     }
 }
