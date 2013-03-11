@@ -1,0 +1,26 @@
+06/03/13 22.35:02
+
+checking temps
+Array
+(
+    [name] => lou_temp
+    [thermTime] => 1362609302
+    [thermTemp] => 19
+)
+checking schedule
+Array
+(
+    [hourOn] => 19
+    [minuteOn] => 0
+    [hourOff] => 23
+    [minuteOff] => 0
+    [day] => 4
+    [heatingOn] => 1
+    [heatingTemp] => 18
+    [waterOn] => 0
+)
+checking holiday
+checking override
+19 more than 18 - switch off
+Switch Heating Off
+
