@@ -93,7 +93,8 @@ if (count($rows) > 1) {
 function getEmonTemp($name) {
     echo "checking temps" . PHP_EOL;
     $query = "SELECT name,
-                     unix_timestamp(time) AS thermTime, 
+                     unix_timestamp(time) AS thermTime,
+                     time,
                      value AS thermTemp 
                      FROM emoncms.feeds WHERE name = '".$name."' LIMIT 0,1";
     //echo $query . PHP_EOL;
