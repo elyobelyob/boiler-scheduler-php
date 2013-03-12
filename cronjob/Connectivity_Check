@@ -11,7 +11,7 @@ then
     echo 0 > /var/www/boiler-scheduler/cronjob/control2drayton.txt
 else
     echo "Connection to 192.168.1.70 failed."
-    /usr/bin/php /var/www/heating/control2drayton.php
+    /usr/bin/php /var/www/boiler-scheduler/control2drayton.php
     echo 1 > /var/www/boiler-scheduler/cronjob/control2drayton.txt
 fi
 
