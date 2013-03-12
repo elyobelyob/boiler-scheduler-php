@@ -116,7 +116,7 @@ function getSchedule() {
     if ($date > 7) {$date = 1;}
     $query = "SELECT    timeOn,
                         timeOff,
-                		DATE_FORMAT(day,'%W') as dayOfWeek,
+                		day,
                 		heatingOn,
                 		heatingTemp,
                 		waterOn
