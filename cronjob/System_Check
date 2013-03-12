@@ -3,5 +3,6 @@
 # temp=44.4'C
 # wiki.stocksy.co.uk/wiki/Raspberry_Pi_onboard_temperature_sensors
 
+echo "** System Temp"
 echo "Updated $(date)"
 /opt/vc/bin/vcgencmd measure_temp

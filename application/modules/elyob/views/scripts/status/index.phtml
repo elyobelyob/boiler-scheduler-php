@@ -28,3 +28,9 @@ fclose($handle);
 
 echo nl2br($contents);
 
+$filename = "http://192.168.1.70/system-check.txt";
+$handle = fopen($filename, "r");
+$contents = fread($handle, filesize($filename));
+fclose($handle);
+
+echo nl2br($contents);
