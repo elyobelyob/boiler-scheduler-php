@@ -114,11 +114,9 @@ function getSchedule() {
     //          AND day = 5
     $date = (date('N')+1);
     if ($date > 7) {$date = 1;}
-    $query = "SELECT    hour(timeOn) as hourOn, 
-                		minute(timeOn) as minuteOn, 
-                		hour(timeOff) as hourOff, 
-                		minute(timeOff) as minuteOff,
-                		day,
+    $query = "SELECT    timeOn,
+                        timeOff,
+                		DAYNAME(day),
                 		heatingOn,
                 		heatingTemp,
                 		waterOn
