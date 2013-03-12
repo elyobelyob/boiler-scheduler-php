@@ -165,10 +165,7 @@ function getOverride() {
     // select UNIX_TIMESTAMP(date) as date, UNIX_TIMESTAMP(date+length) as datelength 
 	//     from boiler.override 
 	//     where UNIX_TIMESTAMP(date) < 1361547580 and (UNIX_TIMESTAMP(date+length) >
-    $query = "SELECT    UNIX_TIMESTAMP(date) as dateout, 
-                        UNIX_TIMESTAMP(date + INTERVAL length MINUTE) as datelength, 
-                        type,
-                        date as datestart,
+    $query = "SELECT    date as datestart,
                         (date + INTERVAL length MINUTE) as dateend,
                         length,
 			heatingTemp
