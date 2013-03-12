@@ -3,7 +3,7 @@
 <?php $this->headScript()->appendFile('/js/jquery-ui-timepicker-addon.js');?>
 
 <?php
-$filename = "/tmp/boiler_scheduler.txt";
+$filename = "/var/log/boiler_scheduler.txt";
 $handle = fopen($filename, "r");
 $contents = fread($handle, filesize($filename));
 fclose($handle);
