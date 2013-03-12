@@ -37,23 +37,35 @@
                 <option value="<?php echo $i?>" <?php if ($i == $default) echo 'selected="selected"'?>>
                     <?php echo $i?> minutes
                 </option><?php endfor; ?>
-            </select> <label for="heatTime">Boost Temp:</label> <select name="temp" id="heatTemp">
+                
+                
+            </select> <label for="heatTemp">Boost Temp:</label> <select name="temp" id="heatTemp">
                 <?php 
-                        $default = 18;
-                        for ($i = 0; $i <= 14; $i = $i + 3) :
-                        ?>
+                    $default = 18;
 
-                <option value="<?php echo $i?>" <?php if ($i == $default) echo 'selected="selected"'?>>
-                    <?php echo $i?>&deg;
-                </option><?php endfor; ?>
-                <?php 
-                        $default = 18;
-                        for ($i = 15; $i <= 26; $i = $i + 1) :
-                        ?>
+                    for ($i = 0; $i <= 14; $i = $i + 3) :
+                    ?>
+                        <option value="<?php echo $i?>" <?php if ($i == $default) echo 'selected="selected"'?>>
+                            <?php echo $i?>&deg;
+                        </option>
+                    <?php 
+                    endfor;
+            
+                    for ($i = 15; $i <= 22; $i = $i + 0.5) :
+                    ?>
+                        <option value="<?php echo $i?>" <?php if ($i == $default) echo 'selected="selected"'?>>
+                            <?php echo $i?>&deg;
+                        </option><?php 
+                    endfor; 
 
-                <option value="<?php echo $i?>" <?php if ($i == $default) echo 'selected="selected"'?>>
-                    <?php echo $i?>&deg;
-                </option><?php endfor; ?>
+                    for ($i = 23; $i <= 26; $i = $i + 1) :
+                    ?>
+                        <option value="<?php echo $i?>" <?php if ($i == $default) echo 'selected="selected"'?>>
+                            <?php echo $i?>&deg;
+                        </option><?php 
+                    endfor; 
+
+                ?>
             </select>
         </fieldset>
     </form>
