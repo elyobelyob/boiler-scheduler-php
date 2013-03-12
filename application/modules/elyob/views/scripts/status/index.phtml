@@ -19,3 +19,12 @@ fclose($handle);
 
 echo nl2br($contents);
 
+echo "</br>";
+
+$filename = "/var/log/system_check.txt";
+$handle = fopen($filename, "r");
+$contents = fread($handle, filesize($filename));
+fclose($handle);
+
+echo nl2br($contents);
+
