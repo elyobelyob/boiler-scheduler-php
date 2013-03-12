@@ -10,6 +10,8 @@ fclose($handle);
 
 echo nl2br($contents);
 
+echo "</br>";
+
 $filename = "/var/log/boiler_scheduler.txt";
 $handle = fopen($filename, "r");
 $contents = fread($handle, filesize($filename));
