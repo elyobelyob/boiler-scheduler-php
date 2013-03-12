@@ -3,6 +3,13 @@
 <?php $this->headScript()->appendFile('/js/jquery-ui-timepicker-addon.js');?>
 
 <?php
+$filename = "/var/log/connectivity.txt";
+$handle = fopen($filename, "r");
+$contents = fread($handle, filesize($filename));
+fclose($handle);
+
+echo nl2br($contents);
+
 $filename = "/var/log/boiler_scheduler.txt";
 $handle = fopen($filename, "r");
 $contents = fread($handle, filesize($filename));
@@ -10,9 +17,3 @@ fclose($handle);
 
 echo nl2br($contents);
 
-$filename = "/var/log/connectivity.txt";
-$handle = fopen($filename, "r");
-$contents = fread($handle, filesize($filename));
-fclose($handle);
-
-echo nl2br($contents);
