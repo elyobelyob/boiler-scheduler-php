@@ -213,11 +213,12 @@ function setHeating() {
 }
 
 function setHeatingOn() {
+    global $heatingPi;
     //heating on
     // call url
     $ch = curl_init();
     // set URL and other appropriate options
-    curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.70/heating/heatingon.php');
+    curl_setopt($ch, CURLOPT_URL, 'http://'.$heatingPi.'/heating/heatingon.php');
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -231,11 +232,12 @@ function setHeatingOn() {
 }
 
 function setHeatingOff() {
+    global $heatingPi;
     //heating on
     // call url
     $ch = curl_init();
     // set URL and other appropriate options
-    curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.70/heating/heatingoff.php');
+    curl_setopt($ch, CURLOPT_URL, 'http://'.$heatingPi.'/heating/heatingoff.php');
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -249,11 +251,12 @@ function setHeatingOff() {
 }
 
 function control2drayton() {
+    global $heatingPi;
     //heating on
     // call url
     $ch = curl_init();
     // set URL and other appropriate options
-    curl_setopt($ch, CURLOPT_URL, 'http://192.168.1.70/heating/control2drayton.php');
+    curl_setopt($ch, CURLOPT_URL, 'http://'.$heatingPi.'/heating/control2drayton.php');
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
