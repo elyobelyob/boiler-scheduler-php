@@ -5,7 +5,7 @@
 
 include 'settings.php';
 
-echo date("d/m/y H.i:s", time()) . PHP_EOL;
+echo "Start scheduler : " . date("d/m/y H.i:s", time()) . PHP_EOL;
 
 // get contents of a file into a string
 $filename = realpath(dirname(__FILE__) . "/control2drayton.txt");
@@ -78,6 +78,8 @@ if ($heatingStatus) {
     }
 
 setHeating();
+
+echo "Finish scheduler : " . date("d/m/y H.i:s", time()) . PHP_EOL;
 
 /*
 if (count($rows) > 1) { 
