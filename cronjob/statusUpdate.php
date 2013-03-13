@@ -16,7 +16,7 @@ if (!$con)
 //Temperature outside check .. if less than 5 degrees .. turn on 30 mins earlier?
 //move through a list of preferred temps to get latest
 //$listTemp = array('therm_temp','lou_temp', 'bed1_temp', 'out_temp');
-$listTemp = array('lou_temp');
+$listTemp = array('lou_temp','bed1_temp','out_temp',);
 
 for ($i=0;$i<count($listTemp);$i++) {
     // we grab from emoncms
@@ -66,7 +66,7 @@ function getEmonTemp($name) {
 }
 
 function getSchedule() {
-    echo "show schedule" . PHP_EOL;
+    echo "current/next schedule" . PHP_EOL;
     // Schedule
     //SELECT * FROM schedule WHERE 
     //          (timeOn < '06:17:00' ) 
@@ -99,7 +99,7 @@ function getSchedule() {
 }
 
 function getHoliday() {
-    echo "show holiday" . PHP_EOL;
+    echo "current/next holiday" . PHP_EOL;
     // Check holiday schedule
     $query = 'SELECT `key`, value FROM boiler.configuration 
                 WHERE ((`key` = "holidayFrom" AND value < '.mktime().') 
@@ -121,7 +121,7 @@ function getHoliday() {
 }
 
 function getOverride() {
-    echo "show override" . PHP_EOL;
+    echo "current/next override" . PHP_EOL;
     // Override
     // select * from override where date > 1361535136 and (date+length > 1361535136)
     // select UNIX_TIMESTAMP(date) as date, UNIX_TIMESTAMP(date+length) as datelength 
