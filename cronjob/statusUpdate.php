@@ -18,6 +18,7 @@ if (!$con)
 //$listTemp = array('therm_temp','lou_temp', 'bed1_temp', 'out_temp');
 $listTemp = array('lou_temp','bed1_temp','out_temp',);
 
+echo "show temps" . PHP_EOL;
 for ($i=0;$i<count($listTemp);$i++) {
     // we grab from emoncms
     if ($data = getEmonTemp($listTemp[$i])) {
@@ -54,7 +55,6 @@ echo "Finish status update : " . date("d/m/y H.i:s", time()) . PHP_EOL;
 // Main Functions
 
 function getEmonTemp($name) {
-    echo "show temps" . PHP_EOL;
     $query = "SELECT name,
                      time,
                      value AS thermTemp 
