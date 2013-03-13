@@ -1,3 +1,12 @@
 <?php echo $this->partial('partials/status.phtml'); ?>
 
-<?php $this->headScript()->appendFile('/js/jquery-ui-timepicker-addon.js');?>
+<?php $this->headScript()->appendFile('/js/jquery-ui-timepicker-addon.js');
+    
+echo "</br>";
+
+$filename = "/var/log/status_update.txt";
+$handle = fopen($filename, "r");
+$contents = fread($handle, filesize($filename));
+fclose($handle);
+
+echo nl2br($contents);

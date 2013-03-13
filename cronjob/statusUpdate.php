@@ -86,7 +86,7 @@ function getSchedule() {
                 OR day > ".$date." 
                 ORDER BY day
                 LIMIT 0,1";  
-    echo $query.PHP_EOL;
+    //echo $query.PHP_EOL;
     $result = mysql_query($query);
     
 /*
