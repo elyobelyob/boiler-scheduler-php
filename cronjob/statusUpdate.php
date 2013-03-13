@@ -18,7 +18,7 @@ if (!$con)
 //$listTemp = array('therm_temp','lou_temp', 'bed1_temp', 'out_temp');
 $listTemp = array('lou_temp','bed1_temp','out_temp',);
 
-echo "show temps" . PHP_EOL;
+echo "<b>show temps</b>" . PHP_EOL;
 for ($i=0;$i<count($listTemp);$i++) {
     // we grab from emoncms
     if ($data = getEmonTemp($listTemp[$i])) {
@@ -71,7 +71,7 @@ function getEmonTemp($name) {
 }
 
 function getSchedule() {
-    echo "current/next schedule" . PHP_EOL;
+    echo "<b>current/next schedule</b>" . PHP_EOL;
     // Schedule
     //SELECT * FROM schedule WHERE 
     //          (timeOn < '06:17:00' ) 
@@ -104,7 +104,7 @@ function getSchedule() {
 }
 
 function getHoliday() {
-    echo "current/next holiday" . PHP_EOL;
+    echo "<b>current/next holiday</b>" . PHP_EOL;
     // Check holiday schedule
     $query = 'SELECT `key`, value FROM boiler.configuration 
                 WHERE ((`key` = "holidayFrom" AND value < '.mktime().') 
@@ -126,7 +126,7 @@ function getHoliday() {
 }
 
 function getOverride() {
-    echo "current/next override" . PHP_EOL;
+    echo "<b>current/next override</b>" . PHP_EOL;
     // Override
     // select * from override where date > 1361535136 and (date+length > 1361535136)
     // select UNIX_TIMESTAMP(date) as date, UNIX_TIMESTAMP(date+length) as datelength 
