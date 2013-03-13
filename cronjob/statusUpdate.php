@@ -81,7 +81,7 @@ function getSchedule() {
                 		heatingTemp,
                 		waterOn
                 FROM boiler.schedule WHERE 
-                (timeOff > '".date('G').":".date('i').":00') 
+                (timeOff > '".date('G').":".date('i').":00' 
                 AND day = ".$date.") 
                 OR day > ".$date." 
                 ORDER BY day
