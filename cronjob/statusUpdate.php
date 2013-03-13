@@ -48,7 +48,7 @@ while($rows = mysql_fetch_assoc($override)) {
     print_r($rows).PHP_EOL;
 }
 
-echo "Finish scheduler : " . date("d/m/y H.i:s", time()) . PHP_EOL;
+echo "Finish status update : " . date("d/m/y H.i:s", time()) . PHP_EOL;
 
 
 // Main Functions
