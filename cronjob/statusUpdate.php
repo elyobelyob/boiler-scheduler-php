@@ -35,11 +35,11 @@ for ($i=0;$i<count($listTemp);$i++) {
 $schedule = getSchedule();
 while($rows = mysql_fetch_assoc($schedule)) {
     	    echo "timeOn : ".$rows['timeOn'].PHP_EOL;
-    	    echo "timeOff : "$rows['timeOff'].PHP_EOL;
-    	    echo "day : "$rows['day'].PHP_EOL;
-    	    echo "heatingOn : "$rows['heatingOn'].PHP_EOL;
-    	    echo "heatingTemp : "$rows['heatingTemp'].PHP_EOL;
-    	    echo "waterOn : "$rows['waterOn'].PHP_EOL;
+    	    echo "timeOff : ".$rows['timeOff'].PHP_EOL;
+    	    echo "day : ".$rows['day'].PHP_EOL;
+    	    echo "heatingOn : ".$rows['heatingOn'].PHP_EOL;
+    	    echo "heatingTemp : ".$rows['heatingTemp'].PHP_EOL;
+    	    echo "waterOn : ".$rows['waterOn'].PHP_EOL;
 }
             
 $holiday = getHoliday();
