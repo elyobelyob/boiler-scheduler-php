@@ -24,9 +24,9 @@ for ($i=0;$i<count($listTemp);$i++) {
     if ($data = getEmonTemp($listTemp[$i])) {
 
     	while($rows = mysql_fetch_assoc($data)) {
-    	    $currentTemp = $rows['thermTemp'];
-        	print_r($rows).PHP_EOL;
-        	if (count($rows) > 0) { break; }
+    	    echo $rows['name'].PHP_EOL;
+    	    echo $rows['time'].PHP_EOL;
+    	    echo $rows['thermTemp'].PHP_EOL;
     	}
 
     }
@@ -34,7 +34,12 @@ for ($i=0;$i<count($listTemp);$i++) {
 
 $schedule = getSchedule();
 while($rows = mysql_fetch_assoc($schedule)) {
-    print_r($rows).PHP_EOL;
+    	    echo $rows['timeOn'].PHP_EOL;
+    	    echo $rows['timeOff'].PHP_EOL;
+    	    echo $rows['day'].PHP_EOL;
+    	    echo $rows['heatingOn'].PHP_EOL;
+    	    echo $rows['heatingTemp'].PHP_EOL;
+    	    echo $rows['waterOn'].PHP_EOL;
 }
             
 $holiday = getHoliday();
