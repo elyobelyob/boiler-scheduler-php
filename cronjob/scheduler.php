@@ -93,7 +93,7 @@ if (count($rows) > 1) {
 // Main Functions
 
 function getEmonTemp($name) {
-    echo "checking temps" . PHP_EOL;
+    echo "<b>checking temps</b>" . PHP_EOL;
     $query = "SELECT name,
                      time,
                      value AS thermTemp 
@@ -105,7 +105,7 @@ function getEmonTemp($name) {
 }
 
 function getSchedule() {
-    echo "checking schedule" . PHP_EOL;
+    echo "<b>checking schedule</b>" . PHP_EOL;
     // Schedule
     //SELECT * FROM schedule WHERE 
     //          (timeOn < '06:17:00' ) 
@@ -136,7 +136,7 @@ function getSchedule() {
 }
 
 function getHoliday() {
-    echo "checking holiday" . PHP_EOL;
+    echo "<b>checking holiday</b>" . PHP_EOL;
     // Check holiday schedule
     $query = 'SELECT `key`, value FROM boiler.configuration 
                 WHERE ((`key` = "holidayFrom" AND value < '.mktime().') 
@@ -158,7 +158,7 @@ function getHoliday() {
 }
 
 function getOverride() {
-    echo "checking override" . PHP_EOL;
+    echo "<b>checking override</b>" . PHP_EOL;
     // Override
     // select * from override where date > 1361535136 and (date+length > 1361535136)
     // select UNIX_TIMESTAMP(date) as date, UNIX_TIMESTAMP(date+length) as datelength 
@@ -201,11 +201,11 @@ function checkHeatingTemp() {
 function setHeating() {
     global $heatingStatus;
     if ($heatingStatus) {
-        echo "Switch Heating On" . PHP_EOL;
+        echo "<b>Switch Heating On</b>" . PHP_EOL;
         $heatingAction = setHeatingOn();
         echo $heatingAction. PHP_EOL;
     } else {
-        echo "Switch Heating Off" . PHP_EOL;
+        echo "<b>Switch Heating Off</b>" . PHP_EOL;
         $heatingAction = setHeatingOff();
         echo $heatingAction. PHP_EOL;
     }
