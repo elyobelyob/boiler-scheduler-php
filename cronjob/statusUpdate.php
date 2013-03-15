@@ -16,7 +16,7 @@ if (!$con)
 //Temperature outside check .. if less than 5 degrees .. turn on 30 mins earlier?
 //move through a list of preferred temps to get latest
 //$listTemp = array('therm_temp','lou_temp', 'bed1_temp', 'out_temp');
-$listTemp = array('lou_temp','bed1_temp','out_temp',);
+$listTemp = array('lou_temp','bed1_temp','bath_temp','loft_temp','out_temp',);
 
 echo "<b>show temps</b>" . PHP_EOL;
 for ($i=0;$i<count($listTemp);$i++) {
@@ -24,7 +24,7 @@ for ($i=0;$i<count($listTemp);$i++) {
     if ($data = getEmonTemp($listTemp[$i])) {
 
     	while($rows = mysql_fetch_assoc($data)) {
-    	    echo "name : ".$rows['name']. ' -> '. $rows['thermTemp'].PHP_EOL;
+    	    echo "name : ".$rows['name']. ' -> '. $rows['thermTemp'].'c'.PHP_EOL;
     	}
 
     }
