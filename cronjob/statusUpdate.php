@@ -24,9 +24,7 @@ for ($i=0;$i<count($listTemp);$i++) {
     if ($data = getEmonTemp($listTemp[$i])) {
 
     	while($rows = mysql_fetch_assoc($data)) {
-    	    echo "name : ".$rows['name'].PHP_EOL;
-    	    echo "time : ".$rows['time'].PHP_EOL;
-    	    echo "thermTemp : ".$rows['thermTemp'].PHP_EOL;
+    	    echo "name : ".$rows['name']. ' -> '. $rows['thermTemp'].PHP_EOL;
     	}
 
     }
@@ -81,10 +79,10 @@ function getSchedule() {
     if ($date > 7) {$date = 1;}
     $query = "SELECT    timeOn,
                         timeOff,
-                		day,
-                		heatingOn,
-                		heatingTemp,
-                		waterOn
+                	day,
+                	heatingOn,
+                	heatingTemp,
+                	waterOn
                 FROM boiler.schedule WHERE 
                 (timeOff > '".date('G').":".date('i').":00' 
                 AND day = ".$date.") 

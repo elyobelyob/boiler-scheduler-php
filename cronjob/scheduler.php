@@ -40,8 +40,8 @@ for ($i=0;$i<count($listTemp);$i++) {
     if ($data = getEmonTemp($listTemp[$i])) {
 
     	while($rows = mysql_fetch_assoc($data)) {
-    	    $currentTemp = $rows['thermTemp'];
-        	print_r($rows).PHP_EOL;
+    		$currentTemp = $rows['thermTemp'];
+        	echo $rows['name']. ' -> '.$rows['thermTemp'].PHP_EOL;
         	if (count($rows) > 0) { break; }
     	}
 
