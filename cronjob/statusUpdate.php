@@ -49,9 +49,15 @@ if( mysql_num_rows($holiday) == 3) {
 
 $override = getOverride();
 while($rows = mysql_fetch_assoc($override)) {
-    print_r($rows).PHP_EOL;
+	echo $rows['datestart'];
+	echo " -> ";
+	echo $rows['dateend'];
+	echo " ";
+	echo $rows['heatingTemp']."c";
+	echo PHP_EOL;
 }
 
+echo PHP_EOL;
 echo "Finish status update : " . date("d/m/y H.i:s", time()) . PHP_EOL;
 
 
