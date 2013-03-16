@@ -24,7 +24,7 @@ for ($i=0;$i<count($listTemp);$i++) {
     if ($data = getEmonTemp($listTemp[$i])) {
 
     	while($rows = mysql_fetch_assoc($data)) {
-    	    echo "name : ".$rows['name']. ' -> '. $rows['thermTemp'].'c'.PHP_EOL;
+    	    echo $rows['name']. ' -> '. $rows['thermTemp'].'c'.PHP_EOL;
     	}
 
     }
