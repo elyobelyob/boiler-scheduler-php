@@ -86,10 +86,10 @@ function getSchedule() {
                 	heatingTemp,
                 	waterOn
                 FROM boiler.schedule WHERE 
-                (timeOff > '".date('G').":".date('i').":00' 
+                (timeOff > CONVERT('".date('G').":".date('i').":00', TIME) 
                 AND day = ".$date.") 
                 OR day > ".$date." 
-                ORDER BY day
+                ORDER BY day ASC, timeoff ASC
                 LIMIT 0,1";  
     //echo $query.PHP_EOL;
     $result = mysql_query($query);
