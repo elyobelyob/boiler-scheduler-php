@@ -53,8 +53,7 @@ $schedule = getSchedule();
 while($rows = mysql_fetch_assoc($schedule)) {
     $heatingStatus = 1;
     $heatingTemp = $rows['heatingTemp'];
-    echo $rows['timeOn']." -> ".$rows['timeOff'].PHP_EOL;
-    echo $dayNames[$rows['day']]." ".$rows['heatingTemp']."c".PHP_EOL;
+    echo $dayNames[$rows['day']]." ".$rows['timeOn']." -> ".$rows['timeOff']." ".$rows['heatingTemp']."c".PHP_EOL;
 }
             
 $holiday = getHoliday();
