@@ -77,10 +77,6 @@ function getEmonTemp($name) {
 function getSchedule() {
     echo "<b>current/next schedule</b>" . PHP_EOL;
     // Schedule
-    //SELECT * FROM schedule WHERE 
-    //          (timeOn < '06:17:00' ) 
-    //          AND (timeOff > '06:17:00' ) 
-    //          AND day = 5
     $date = (date('N')+1);
     if ($date > 7) {$date = 1;}
     $query = "SELECT    timeOn,
@@ -147,11 +143,6 @@ function getOverride() {
     //echo $query.PHP_EOL;
     $result = mysql_query($query) or die(mysql_error());
 
-/*
-    while($row = mysql_fetch_array($result)) {  
-        print_r($row).PHP_EOL;
-    }
-*/
     return $result;
 }
 

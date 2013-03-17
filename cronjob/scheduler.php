@@ -68,7 +68,12 @@ $override = getOverride();
 while($rows = mysql_fetch_assoc($override)) {
     $heatingStatus = 1;
     $heatingTemp = $rows['heatingTemp'];
-    print_r($rows).PHP_EOL;
+        echo $rows['datestart'];
+        echo " -> ";
+        echo $rows['dateend'].PHP_EOL;
+        echo $rows['length']." ";
+        echo $rows['heatingTemp'].PHP_EOL;
+
 }
 
 if ($heatingStatus) {
@@ -178,7 +183,11 @@ function getOverride() {
 
 /*
     while($row = mysql_fetch_array($result)) {  
-        print_r($row).PHP_EOL;
+	echo $row['datestart'];
+	echo " -> ";
+	echo $row['dateend'].PHP_EOL;
+	echo $row['length']." ";
+	echo $row['heatingTemp'].PHP_EOL;
     }
 */
     return $result;
