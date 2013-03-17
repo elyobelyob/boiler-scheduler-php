@@ -1,0 +1,66 @@
+#    This file is part of rpi2pachube.
+#    Copyright (c) 2012-2013, Ricardo Cabral <ricardo.arturo.cabral@gmail.com>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#######################################################
+#                    READ ME FIRST                    #
+#######################################################
+# 1. Run setup.sh instead of using this file.
+# 2. If you run into trouble running setup.sh,
+#    copy this file to /etc/rpi2pachube.conf
+#    OR $HOME/.rpi2pachube.conf instead (note the dot on the 
+#    filenamename)
+# 3. Edit the following variables.
+# 4. Save the file.
+#######################################################
+
+# API Key
+api_key="api key here"
+
+# Feed ID
+feed="feed here"
+
+# Monitor load average
+monitor_load_avg=1
+
+# Monitor free RAM memory
+monitor_mem_free=1
+
+# Monitor used RAM memory
+monitor_mem_used=1
+
+# Monitor cached RAM memory
+monitor_mem_cached=1
+
+# Monitor the temperature
+monitor_temp=1
+monitor_temp_f=0
+
+# Monitor the number of processes
+monitor_pid_count=1
+
+# Monitor the number of active TCP/UDP connections
+monitor_connections=1
+
+# Monitor the number of users logged in
+monitor_users=1
+
+# Monitor monitor_network_interfaces
+monitor_network_interfaces=1
+
+# Network Interfaces
+network_interfaces=eth0,wlan0
+
+
