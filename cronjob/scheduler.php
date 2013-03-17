@@ -4,6 +4,7 @@
 // otherwise continue ... 
 
 include 'settings.php';
+$dayNames = array( '','Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' );
 
 echo "Start scheduler : " . date("d/m/y H.i:s", time()) . PHP_EOL;
 
@@ -52,7 +53,8 @@ $schedule = getSchedule();
 while($rows = mysql_fetch_assoc($schedule)) {
     $heatingStatus = 1;
     $heatingTemp = $rows['heatingTemp'];
-    print_r($rows).PHP_EOL;
+    echo $rows['timeOn']." -> ".$rows['timeOff'].PHP_EOL;
+    echo $dayName[$rows['day']]." ".$rows['heatingTemp']."c".PHP_EOL;
 }
             
 $holiday = getHoliday();
