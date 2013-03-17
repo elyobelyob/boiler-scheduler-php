@@ -17,7 +17,7 @@ if (!$con)
 //move through a list of preferred temps to get latest
 //$listTemp = array('therm_temp','lou_temp', 'bed1_temp', 'out_temp');
 $listTemp = array('lou_temp','bed1_temp','bath_temp','loft_temp','out_temp',);
-$dayNames = array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' );
+$dayNames = array( '','Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' );
 
 echo "<b>show temps</b>" . PHP_EOL;
 for ($i=0;$i<count($listTemp);$i++) {
