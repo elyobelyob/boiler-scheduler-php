@@ -17,6 +17,7 @@ if (!$con)
 //move through a list of preferred temps to get latest
 //$listTemp = array('therm_temp','lou_temp', 'bed1_temp', 'out_temp');
 $listTemp = array('lou_temp','bed1_temp','bath_temp','loft_temp','out_temp',);
+$dayNames = array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' );
 
 echo "<b>show temps</b>" . PHP_EOL;
 for ($i=0;$i<count($listTemp);$i++) {
@@ -34,7 +35,7 @@ $schedule = getSchedule();
 while($rows = mysql_fetch_assoc($schedule)) {
     	    echo "timeOn : ".$rows['timeOn'].PHP_EOL;
     	    echo "timeOff : ".$rows['timeOff'].PHP_EOL;
-    	    echo "day : ".$rows['day'].PHP_EOL;
+    	    echo "day : ".$dayNames[$rows['day']].PHP_EOL;
     	    echo "heatingOn : ".$rows['heatingOn'].PHP_EOL;
     	    echo "heatingTemp : ".$rows['heatingTemp'].PHP_EOL;
     	    echo "waterOn : ".$rows['waterOn'].PHP_EOL;
