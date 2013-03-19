@@ -68,3 +68,11 @@ rm master.zip
 </code></pre>
 
 You're done - you should be able to visit your Pis web page and load up the web frontend
+
+THINGS I WANT TO DO
+
+Keep record of .1 increase decrease whilst heating on. Also heating on off calls in same table.
+how fast a house heats and cools.Build a target temp option. Should be a learning system with option in schedule.
+Ignore times extra heating on eg lounge fire, eg move to second node for x hours or ignore unusual heating bursts, eg direct sunshine effect.
+Work out temp difference for other nodes in case primary node battery/comms dies.
+Maintain temp setting. Put hearing on early if outside dropping fast and internal ok?

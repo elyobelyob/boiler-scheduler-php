@@ -15,6 +15,7 @@ class Api_OverrideController extends Zend_Controller_Action
 		$data = $this->_getParam('toggle');
 		$time = $this->_getParam('time');
 		$temp = $this->_getParam('temp');
+		$temp = $this->_getParam('delay');
 		$key = "";
 	
 		$output = array();
@@ -41,7 +42,7 @@ class Api_OverrideController extends Zend_Controller_Action
             // Now add the new row
             $data = array(
                 'type'          => 'heat',
-                'date'          => date('Y-m-d H:i:s'),
+                'date'          => date('Y-m-d H:i:s',strtotime("+".$delay." minutes")),
                 'length'        => $time,
                 'boost'         => 1,
                 'enabled'       => 1,

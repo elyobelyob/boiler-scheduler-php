@@ -60,7 +60,7 @@ $(document).ready(checkStatus());
 function setupDialog(dialogId, postName, timeId, tempId, buttonId) {
     $( dialogId ).dialog({
         autoOpen: false,
-        height: 150,
+        height: 200,
         width: 250,
         modal: true,
         buttons: {
