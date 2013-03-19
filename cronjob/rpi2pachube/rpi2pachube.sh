@@ -59,7 +59,7 @@ fi
 # Read temperature (some systems do not define LD_LIBRARY_PATH)
 if [ $monitor_temp -eq 1 ]; then
   temp=$(env LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/vc/lib \
-    /opt/vc/bin/vcgencmd measure_temp | sed "s/temp=\([0-9]\+\.[0-9]\+\)'C/\1/")
+    sudo /opt/vc/bin/vcgencmd measure_temp | sed "s/temp=\([0-9]\+\.[0-9]\+\)'C/\1/")
   if [ $monitor_temp_f -eq 1 ]; then
     temp=$(echo $temp | awk '{r=$1*9/5+32; printf "%0.2f", r}')
   fi
