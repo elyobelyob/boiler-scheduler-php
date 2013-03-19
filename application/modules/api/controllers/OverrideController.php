@@ -39,10 +39,12 @@ class Api_OverrideController extends Zend_Controller_Action
             
             $override->update($data,$where);
 
+            $datestart = strtotime(date("Y-m-d H:i:s")." + ".$delay."" minutes""));
+            
             // Now add the new row
             $data = array(
                 'type'          => 'heat',
-                'date'          => date('Y-m-d H:i:s',strtotime("+".$delay." minutes")),
+                'date'          => $datestart,
                 'length'        => $time,
                 'boost'         => 1,
                 'enabled'       => 1,
