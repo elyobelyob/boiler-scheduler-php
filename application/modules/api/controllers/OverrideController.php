@@ -44,7 +44,7 @@ class Api_OverrideController extends Zend_Controller_Action
             // Now add the new row
             $data = array(
                 'type'          => 'heat',
-                'date'          => $datestart,
+                'date'          => date("Y-m-d H:i:s",$datestart),
                 'length'        => $time,
                 'boost'         => 1,
                 'enabled'       => 1,
