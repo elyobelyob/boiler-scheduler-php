@@ -18,9 +18,9 @@ function setupDialog(dialogId, postName, timeId, tempId, delayId, buttonId) {
         modal: true,
         buttons: {
           "Toggle": function() {
-        	  $.post("/api/override/boost/toggle/" + postName +"/time/" + $(timeId).val() +"/temp/" + $(tempId).val() +"/delay/" + $(delayId).val(), function(json) {
+        	  $.post("/api/override/boost/toggle/"+postName +"/time/"+$(timeId).val()+"/temp/"+ $(tempId).val()+"/delay/"+$(delayId).val(), function(json) {
       			if (json.Result == "OK") {
-/*       				updateImages(json); */
+          			/*updateImages(json); */
       			} else {
       				$dialog.html("Oops something went wrong");
       			}
