@@ -15,7 +15,7 @@ class Api_OverrideController extends Zend_Controller_Action
 		$data = $this->_getParam('toggle');
 		$time = $this->_getParam('time');
 		$temp = $this->_getParam('temp');
-		$temp = $this->_getParam('delay');
+		$delay = $this->_getParam('delay');
 		$key = "";
 	
 		$output = array();
