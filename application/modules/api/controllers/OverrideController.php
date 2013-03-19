@@ -39,7 +39,7 @@ class Api_OverrideController extends Zend_Controller_Action
             
             $override->update($data,$where);
 
-            $datestart = strtotime(date("Y-m-d H:i:s")." + ".$delay."" minutes""));
+            $datestart = strtotime(time()  + ($delay*60));
             
             // Now add the new row
             $data = array(
