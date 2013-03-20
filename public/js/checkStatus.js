@@ -22,7 +22,7 @@ function setupDialog(dialogId, postName, timeId, tempId, delayId, buttonId) {
       			if (json.Result == "OK") {
           			/*updateImages(json); */
       			} else {
-      				$dialog.html("Oops something went wrong");
+      				/*$dialog.html("Oops something went wrong");*/
       			}
       		}, "json");
               $( this ).dialog( "close" );
