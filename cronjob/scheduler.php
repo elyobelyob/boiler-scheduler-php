@@ -128,7 +128,7 @@ function getSchedule() {
                 FROM boiler.schedule WHERE 
                 (timeOn < '".date('G').":".date('i').":00') 
                 AND (timeOff > '".date('G').":".date('i').":00') 
-                AND day = ".$date." LIMIT 0,1";  
+                AND day = ".$date;  
     echo $query.PHP_EOL;
     $result = mysql_query($query);
     
