@@ -129,7 +129,7 @@ function getSchedule() {
                 (timeOn < '".date('G').":".date('i').":00') 
                 AND (timeOff > '".date('G').":".date('i').":00') 
                 AND day = ".$date;  
-    echo $query.PHP_EOL;
+    //cho $query.PHP_EOL;
     $result = mysql_query($query);
     
 /*
