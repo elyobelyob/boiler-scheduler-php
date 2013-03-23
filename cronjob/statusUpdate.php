@@ -44,7 +44,9 @@ while($rows = mysql_fetch_assoc($schedule)) {
 $holiday = getHoliday();
 if( mysql_num_rows($holiday) == 3) {
     while($rows = mysql_fetch_assoc($holiday)) {
-        print_r($rows).PHP_EOL;
+        foreach ($rows as $key => $value) {
+            echo $key." ".$value.PHP_EOL;
+        }
     }
 }
 
@@ -95,11 +97,6 @@ function getSchedule() {
     //echo $query.PHP_EOL;
     $result = mysql_query($query);
     
-/*
-    while($row = mysql_fetch_array($result)) {  
-        print_r($row).PHP_EOL;
-    }
-*/
     return $result;
     
 }
@@ -114,14 +111,6 @@ function getHoliday() {
     //echo $query . PHP_EOL;
     $result = mysql_query($query);
     
-/*
-    if( mysql_num_rows($result) == 3) {
-        while($rows = mysql_fetch_array($result)) {  
-            print_r($rows).PHP_EOL;
-        }
-        return $rows; 
-    }
-*/
     return $result; 
 
 }

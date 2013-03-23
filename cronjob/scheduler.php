@@ -61,7 +61,9 @@ if( mysql_num_rows($holiday) == 3) {
     while($rows = mysql_fetch_assoc($holiday)) {
         $heatingStatus = 1;
         $heatingTemp = 8;
-        print_r($rows).PHP_EOL;
+        foreach ($rows as $key => $value) {
+            echo $key." ".$value.PHP_EOL;
+        }
     }
 }
 
@@ -87,15 +89,6 @@ setHeating();
 
 echo "Finish scheduler : " . date("d/m/y H.i:s", time()) . PHP_EOL;
 
-/*
-if (count($rows) > 1) { 
-    // ignore schedule and override and set 24 hour to holiday temp
-    $temp = $row['temp'];
-    } else {
-
-}
-*/
-
 // Main Functions
 
 function getEmonTemp($name) {
@@ -106,7 +99,6 @@ function getEmonTemp($name) {
                      FROM emoncms.feeds WHERE name = '".$name."' LIMIT 0,1";
     //echo $query . PHP_EOL;
     $result = mysql_query($query);
-    //echo mysql_num_rows($result) . PHP_EOL;
     return $result;    
 }
 
