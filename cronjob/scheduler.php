@@ -118,7 +118,8 @@ function getSchedule() {
                 		heatingTemp,
                 		waterOn
                 FROM boiler.schedule WHERE 
-                (timeOn < '".date('G').":".date('i').":00') 
+                enabled = 1 
+                AND (timeOn < '".date('G').":".date('i').":00') 
                 AND (timeOff > '".date('G').":".date('i').":00') 
                 AND day = ".$date;  
     //cho $query.PHP_EOL;
