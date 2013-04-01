@@ -3,7 +3,7 @@
 // script to check that the batteries haven't died
 
 include 'settings.php';
-require '../vendor/autoload.php';
+require realpath(dirname(__FILE__) . '/../vendor/autoload.php');
 
 $con = mysql_connect($db,$dbuser,$dbpasswd) or die("Cannot connect mysql".PHP_EOL);
 
