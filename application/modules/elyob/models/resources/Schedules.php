@@ -27,7 +27,7 @@ class Elyob_Resource_Schedules extends SF_Model_Resource_Db_Table_Abstract
 		                                          'heatingTemp',
 		                                          'waterOn',
 		                                          'enabled'));
-		$select->order(array('enabled DESC', 'group ASC', 'day ASC', 'timeOn ASC'));
+		$select->order(array( 'day ASC', 'timeOn ASC', 'id ASC'));
 		return $this->fetchAll($select);
 	}
 	

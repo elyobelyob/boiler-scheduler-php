@@ -3,3 +3,9 @@
 $db = 'locahost';
 $dbuser = 'USER';
 $dbpasswd = 'PASS';
+
+$heatingPi = '192.168.1.70';
+
+$checktime = '-10 MINUTES';
+
+$prowlapi = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';

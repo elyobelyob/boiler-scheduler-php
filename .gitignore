@@ -2,3 +2,5 @@ application/config/config.ini
 cronjob/settings.php
 .htpasswd
 public/.htaccess
+composer.lock
+vendor/*
