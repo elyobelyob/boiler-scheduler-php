@@ -37,6 +37,22 @@ class Api_ConfigurationController extends Zend_Controller_Action
     		->setHttpResponseCode(200)
     		->appendBody($json);
 	}
+
+        public function historyAction()
+        {
+                $from = strftime("%A %d %B %H:%M", (int) ($this->_model->getConfigurationByKey("holidayFrom")->value));
+        $to = strftime("%A %d %B %H:%M", (int) ($this->_model->getConfigurationByKey("holidayTo")->value));
+
+                $output['Result'] = "OK";
+                $output['Message'] = "From: $from To: $to";
+
+
+                $json = Zend_Json::encode($output);
+                $this->getResponse()
+                ->setHttpResponseCode(200)
+                ->appendBody($json);
+        }
+	
 	
 	public function boostAction()
 	{

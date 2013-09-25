@@ -1,0 +1,20 @@
+
+In here NJB will put in the last request times .. saved in DB ... 
+<br/>
+In here NJB will put in the last switch on/off times .. save in DB??
+
+<?php
+
+echo "</br>";
+echo "</br>";
+echo "</br>";
+
+$filename = "/var/log/boiler_scheduler.txt";
+$handle = fopen($filename, "r");
+$contents = fread($handle, filesize($filename));
+fclose($handle);
+
+echo nl2br($contents);
+
+echo "</br>";
+

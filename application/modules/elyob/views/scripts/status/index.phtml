@@ -29,7 +29,7 @@ fclose($handle);
 echo nl2br($contents);
 
 $filename = "http://192.168.1.70/system-check.txt";
-$news = fopen($filename, "r"); // or die ("Link does not exist!");
+$news = fopen($filename, "r") or die ("Link does not exist!");
 unset($text);
 while (!feof($news)) {
   $newbuffer = fgets($news, 4096);

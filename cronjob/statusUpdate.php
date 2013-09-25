@@ -33,12 +33,12 @@ for ($i=0;$i<count($listTemp);$i++) {
 
 $schedule = getSchedule();
 while($rows = mysql_fetch_assoc($schedule)) {
-    	    echo "timeOn : ".$rows['timeOn'].PHP_EOL;
-    	    echo "timeOff : ".$rows['timeOff'].PHP_EOL;
-    	    echo "day : ".$dayNames[$rows['day']].PHP_EOL;
-    	    echo "heatingOn : ".$rows['heatingOn'].PHP_EOL;
-    	    echo "heatingTemp : ".$rows['heatingTemp'].PHP_EOL;
-    	    echo "waterOn : ".$rows['waterOn'].PHP_EOL;
+    	    echo $rows['timeOn'];
+    	    echo "- ".$rows['timeOff'];
+    	    echo " ".$dayNames[$rows['day']];
+    	    echo " ".$rows['heatingTemp']."c";
+    	    //echo " waterOn : ".$rows['waterOn'].PHP_EOL;
+    	    echo PHP_EOL;
 }
             
 $holiday = getHoliday();
@@ -78,7 +78,7 @@ function getEmonTemp($name) {
 }
 
 function getSchedule() {
-    echo "<b>current/next schedule</b>" . PHP_EOL;
+    echo "<b>todays schedule</b>" . PHP_EOL;
     // Schedule
     $date = (date('N')+1);
     if ($date > 7) {$date = 1;}
@@ -89,11 +89,10 @@ function getSchedule() {
                 	heatingTemp,
                 	waterOn
                 FROM boiler.schedule WHERE 
-                (timeOff > CONVERT('".date('G').":".date('i').":00', TIME) 
-                AND day = ".$date.") 
-                OR day > ".$date." 
+                day = ".$date." 
+		AND enabled = 1
                 ORDER BY day ASC, timeoff ASC
-                LIMIT 0,1";  
+		";
     //echo $query.PHP_EOL;
     $result = mysql_query($query);
     
