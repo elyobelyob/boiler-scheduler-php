@@ -4,7 +4,7 @@
     
 echo "</br>";
 
-$filename = "/var/log/status_update.txt";
+$filename = "/var/log/status_update.tmp";
 $handle = fopen($filename, "r");
 $contents = fread($handle, filesize($filename));
 fclose($handle);

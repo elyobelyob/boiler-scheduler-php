@@ -9,7 +9,7 @@ echo "</br>";
 echo "</br>";
 echo "</br>";
 
-$filename = "/var/log/boiler_scheduler.txt";
+$filename = "/var/log/boiler_scheduler.tmp";
 $handle = fopen($filename, "r");
 $contents = fread($handle, filesize($filename));
 fclose($handle);

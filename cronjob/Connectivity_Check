@@ -1,8 +1,4 @@
 #!/bin/sh
-# Measure temp via sudo .... /opt/vc/bin/vcgencmd measure_temp 
-# root@raspberrypi:/home/pi# /opt/vc/bin/vcgencmd measure_temp
-# temp=44.4'C
-# wiki.stocksy.co.uk/wiki/Raspberry_Pi_onboard_temperature_sensors
 
 echo "Updated $(date)"
 echo "Checking internet connectivity..."

@@ -4,3 +4,4 @@ cronjob/settings.php
 public/.htaccess
 composer.lock
 vendor/*
+*.tmp
