@@ -3,7 +3,7 @@
 <?php $this->headScript()->appendFile('/js/jquery-ui-timepicker-addon.js');?>
 
 <?php
-$filename = "/var/log/connectivity.tmp";
+$filename = "/var/log/boiler/connectivity.tmp";
 $handle = fopen($filename, "r");
 $contents = fread($handle, filesize($filename));
 fclose($handle);
@@ -12,7 +12,7 @@ echo nl2br($contents);
 
 echo "</br>";
 
-$filename = "/var/log/boiler_scheduler.tmp;
+$filename = "/var/log/boiler/boiler_scheduler.tmp;
 $handle = fopen($filename, "r");
 $contents = fread($handle, filesize($filename));
 fclose($handle);
@@ -21,7 +21,7 @@ echo nl2br($contents);
 
 echo "</br>";
 
-$filename = "/var/log/system_check.tmp";
+$filename = "/var/log/boiler/system_check.tmp";
 $handle = fopen($filename, "r");
 $contents = fread($handle, filesize($filename));
 fclose($handle);
@@ -29,7 +29,7 @@ fclose($handle);
 echo nl2br($contents);
 
 /*
-$filename = "http://192.168.1.70/system-check.tmp";
+$filename = "http://192.168.1.70/boiler/system-check.tmp";
 $news = fopen($filename, "r") or die ("Link does not exist!");
 unset($text);
 while (!feof($news)) {
