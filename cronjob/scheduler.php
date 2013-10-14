@@ -8,18 +8,6 @@ $dayNames = array( '','Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'F
 
 echo "Start scheduler : " . date("d/m/y H.i:s", time()) . PHP_EOL;
 
-// get contents of a file into a string
-$filename = realpath(dirname(__FILE__) . "/control2drayton.txt");
-$handle = fopen($filename, "r");
-$contents = fread($handle, filesize($filename));
-fclose($handle);
-
-if ($contents == 1) {
-    echo "Control back to Drayton" . PHP_EOL;
-    control2drayton();
-    exit;
-}
-
 $con = mysql_connect($db,$dbuser,$dbpasswd) or die("Cannot connect mysql".PHP_EOL);
 
 if (!$con)
@@ -206,10 +194,12 @@ function setHeating() {
     if ($heatingStatus) {
         echo "<b>Switch Heating On</b>" . PHP_EOL;
         $heatingAction = setHeatingOn();
+        logLastAction(1);
         echo $heatingAction. PHP_EOL;
     } else {
         echo "<b>Switch Heating Off</b>" . PHP_EOL;
         $heatingAction = setHeatingOff();
+        logLastAction(0);
         echo $heatingAction. PHP_EOL;
     }
 }
@@ -237,6 +227,7 @@ function setHeatingOff() {
     global $heatingPi;
     //heating on
     // call url
+/*
     $ch = curl_init();
     // set URL and other appropriate options
     curl_setopt($ch, CURLOPT_URL, 'http://'.$heatingPi.'/heating/heatingoff.php');
@@ -249,6 +240,7 @@ function setHeatingOff() {
     curl_exec($ch);
     // close cURL resource, and free up system resources
     curl_close($ch);
+*/
     
 }
 
@@ -271,4 +263,15 @@ function control2drayton() {
     
 }
 
+function logLastAction($status) {
+        $query = "SELECT * FROM boiler.boiler_history ORDER BY id DESC LIMIT 1";
+        $result = mysql_query($query);
+        $lastinput = mysql_fetch_array($result);
+        
 
+    if ($lastinput['status'] != $status) {
+        $query = "INSERT INTO boiler.boiler_history (status,datetime) VALUES ($status,NOW())";
+        //echo $query . PHP_EOL;
+        $result = mysql_query($query);
+    }
+}
