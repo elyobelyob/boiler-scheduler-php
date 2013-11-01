@@ -97,8 +97,10 @@ function getSchedule() {
     //          (timeOn < '06:17:00' ) 
     //          AND (timeOff > '06:17:00' ) 
     //          AND day = 5
-    $date = (date('N')+1);
-    if ($date > 7) {$date = 1;}
+    
+    $dayOfWeek = (date('N')+1);
+    if ($dayOfWeek > 7) { $dayOfWeek = 1; }
+    
     $query = "SELECT    timeOn,
                         timeOff,
                 		day,
@@ -109,7 +111,7 @@ function getSchedule() {
                 enabled = 1 
                 AND (timeOn < '".date('G').":".date('i').":00') 
                 AND (timeOff > '".date('G').":".date('i').":00') 
-                AND day = ".$date;  
+                AND day = ".$dayOfWeek;
     //cho $query.PHP_EOL;
     $result = mysql_query($query);
     
@@ -131,7 +133,7 @@ function getHoliday() {
                     OR (`key` = "holidayTemp" AND value <> 0))';
     //echo $query . PHP_EOL;
     $result = mysql_query($query);
-    
+
 /*
     if( mysql_num_rows($result) == 3) {
         while($rows = mysql_fetch_array($result)) {  
@@ -151,10 +153,10 @@ function getOverride() {
     // select UNIX_TIMESTAMP(date) as date, UNIX_TIMESTAMP(date+length) as datelength 
 	//     from boiler.override 
 	//     where UNIX_TIMESTAMP(date) < 1361547580 and (UNIX_TIMESTAMP(date+length) >
-    $query = "SELECT    date as datestart,
-                        (date + INTERVAL length MINUTE) as dateend,
-                        length,
-			heatingTemp
+    $query = "SELECT date as datestart,
+                    (date + INTERVAL length MINUTE) as dateend,
+                    length,
+                    heatingTemp
                 FROM boiler.override WHERE 
                     enabled = 1
                     AND UNIX_TIMESTAMP(date) < ".mktime()." 
@@ -193,12 +195,12 @@ function setHeating() {
     global $heatingStatus;
     if ($heatingStatus) {
         echo "<b>Switch Heating On</b>" . PHP_EOL;
-        $heatingAction = setHeatingOn();
+        $heatingAction = $this->setHeatingOn();
         logLastAction(1);
         echo $heatingAction. PHP_EOL;
     } else {
         echo "<b>Switch Heating Off</b>" . PHP_EOL;
-        $heatingAction = setHeatingOff();
+        $heatingAction = $this->setHeatingOff();
         logLastAction(0);
         echo $heatingAction. PHP_EOL;
     }
@@ -225,7 +227,7 @@ function setHeatingOn() {
 
 function setHeatingOff() {
     global $heatingPi;
-    //heating on
+    //heating off
     // call url
     $ch = curl_init();
     // set URL and other appropriate options
@@ -244,7 +246,7 @@ function setHeatingOff() {
 
 function control2drayton() {
     global $heatingPi;
-    //heating on
+    //heating control back to backup
     // call url
     $ch = curl_init();
     // set URL and other appropriate options
@@ -262,11 +264,10 @@ function control2drayton() {
 }
 
 function logLastAction($status) {
-        $query = "SELECT * FROM boiler.boiler_history ORDER BY id DESC LIMIT 1";
-        $result = mysql_query($query);
-        $lastinput = mysql_fetch_array($result);
+    $query = "SELECT * FROM boiler.boiler_history ORDER BY id DESC LIMIT 1";
+    $result = mysql_query($query);
+    $lastinput = mysql_fetch_array($result);
         
-
     if ($lastinput['status'] != $status) {
         $query = "INSERT INTO boiler.boiler_history (status,datetime) VALUES ($status,NOW())";
         //echo $query . PHP_EOL;
