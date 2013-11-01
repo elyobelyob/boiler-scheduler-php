@@ -195,12 +195,12 @@ function setHeating() {
     global $heatingStatus;
     if ($heatingStatus) {
         echo "<b>Switch Heating On</b>" . PHP_EOL;
-        $heatingAction = $this->setHeatingOn();
+        $heatingAction = setHeatingOn();
         logLastAction(1);
         echo $heatingAction. PHP_EOL;
     } else {
         echo "<b>Switch Heating Off</b>" . PHP_EOL;
-        $heatingAction = $this->setHeatingOff();
+        $heatingAction = setHeatingOff();
         logLastAction(0);
         echo $heatingAction. PHP_EOL;
     }
