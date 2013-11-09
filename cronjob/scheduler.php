@@ -264,12 +264,15 @@ function control2drayton() {
 }
 
 function logLastAction($status) {
+
+    global $heatingStatus, $heatingTemp, $currentTemp;
+
     $query = "SELECT * FROM boiler.boiler_history ORDER BY id DESC LIMIT 1";
     $result = mysql_query($query);
     $lastinput = mysql_fetch_array($result);
         
     if ($lastinput['status'] != $status) {
-        $query = "INSERT INTO boiler.boiler_history (status,datetime) VALUES ($status,NOW())";
+        $query = "INSERT INTO boiler.boiler_history (status,datetime,temp,node) VALUES ($status,NOW(),$currentTemp,'lou_temp')";
         //echo $query . PHP_EOL;
         $result = mysql_query($query);
     }
