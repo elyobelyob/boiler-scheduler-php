@@ -39,29 +39,35 @@
                     ?>
 
                     <option value="<?php echo $i ?>" <?php if ($i == $default) echo 'selected="selected"' ?> >
-                        <?php echo $i ?> minutes
+                        <?php
+                        if ($i > 59) {
+                        echo ($i/60)."h";
+                        } else {
+                        echo $i."m";
+                        }
+                        ?>
                     </option>
                 <?php endfor; ?>
 
 
                 <option value="720" <?php if ($i == $default) echo 'selected="selected"' ?> >
-                    1/2 day
+                    12h
                 </option>
 
                 <option value="1440" <?php if ($i == $default) echo 'selected="selected"' ?> >
-                    1 day
+                    24h/1d
                 </option>
 
                 <option value="2880" <?php if ($i == $default) echo 'selected="selected"' ?> >
-                    2 days
+                    48h/2d
                 </option>
 
                 <option value="4320" <?php if ($i == $default) echo 'selected="selected"' ?> >
-                    3 days
+                    72h/3d
                 </option>
 
                 <option value="5760" <?php if ($i == $default) echo 'selected="selected"' ?> >
-                    4 days
+                    96h/4d
                 </option>
 
             </select>
@@ -109,7 +115,13 @@
                     ?>
 
                     <option value="<?php echo $i ?>" <?php if ($i == $default) echo 'selected="selected"' ?> >
-                        <?php echo $i ?> minutes
+                    <?php
+                        if ($i > 59) {
+                        echo ($i/60)." h";
+                        } else {
+                        echo $i." m";
+                        }
+                    ?>
                     </option>
 
                 <?php endfor; ?>
@@ -131,7 +143,13 @@
                     ?>
 
                     <option value="<?php echo $i ?>" <?php if ($i == $default) echo 'selected="selected"' ?> >
-                        <?php echo $i ?> minutes
+                        <?php
+                        if ($i > 59) {
+                            echo ($i/60)." hours";
+                        } else {
+                            echo $i." minutes";
+                        }
+                        ?>
                     </option>
                 <?php endfor; ?>
             </select>
