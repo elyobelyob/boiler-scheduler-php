@@ -153,9 +153,13 @@
                     <option value="<?php echo $i ?>" <?php if ($i == $default) echo 'selected="selected"' ?> >
                         <?php
                         if ($i > 59) {
-                            echo ($i/60)." hours";
+                            $decTime = $i/60;
+                            $hour = floor($decTime);
+                            $min = round(60*($decTime-$hour));
+                            echo $hour.'h ';
+                            echo sprintf('%02d',$min).'m';
                         } else {
-                            echo $i." minutes";
+                            echo "0h ".sprintf('%02d',$i)."m";
                         }
                         ?>
                     </option>
