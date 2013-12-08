@@ -22,7 +22,7 @@ class Api_HistoryController extends Zend_Controller_Action
 			}
 			$jTableResult['Options'] = $array;
 		} else {
-			$jTableResult['Records'] = $this->_model->getHistory()->toArray();
+			$jTableResult['Records'] = $this->_model->getHistoryLastFifty()->toArray();
 		}
 		
 		$json = Zend_Json::encode($jTableResult);

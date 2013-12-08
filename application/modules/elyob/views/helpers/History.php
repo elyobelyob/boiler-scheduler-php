@@ -13,10 +13,14 @@ class Zend_View_Helper_History extends Zend_View_Helper_Abstract
     	$this->_model = new Elyob_Model_History();
     	if (is_null($id)) return $this;
     	
-		return $this->_model->getHistory();
+		return $this->_model->getHistoryLastFifty();
     }
-    
+
     public function getHistory() {
-    	return $this->_model->getHistory();
+        return $this->_model->getHistory();
+    }
+
+    public function getHistoryLastFifty() {
+        return $this->_model->getHistoryLastFifty();
     }
 }
