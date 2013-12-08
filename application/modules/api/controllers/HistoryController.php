@@ -15,7 +15,7 @@ class Api_HistoryController extends Zend_Controller_Action
 		
 		$displayas = $this->_getParam("display");
 		if($displayas == "options") {
-			$groups = $this->_model->getHistory();
+			$groups = $this->_model->getHistoryLastFifty();
 			$array = array();
 			foreach ($groups as $group) {
 				$array[] = array("DisplayText" => $group->name, "Value" => $group->id);

@@ -6,10 +6,15 @@ class Elyob_Model_History extends SF_Model_Abstract
 	{
 		return $this->getResource('History')->getHistory();
 	}
-	
-	public function getHistoryByDate($date)
-	{
-		return $this->getResource('History')->getHistoryByDate($date);
-	}
+
+    public function getHistoryLastFifty()
+    {
+        return $this->getResource('History')->getHistoryLastFifty();
+    }
+
+    public function getHistoryByDate($date)
+    {
+        return $this->getResource('History')->getHistoryByDate($date);
+    }
 
 }
