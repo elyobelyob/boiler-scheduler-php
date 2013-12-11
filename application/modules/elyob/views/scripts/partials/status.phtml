@@ -55,6 +55,26 @@
 
 
                 <option value="720" <?php if ($i == $default) echo 'selected="selected"' ?> >
+                    7h
+                </option>
+
+                <option value="720" <?php if ($i == $default) echo 'selected="selected"' ?> >
+                    8h
+                </option>
+
+                <option value="720" <?php if ($i == $default) echo 'selected="selected"' ?> >
+                    9h
+                </option>
+
+                <option value="720" <?php if ($i == $default) echo 'selected="selected"' ?> >
+                    10h
+                </option>
+
+                <option value="720" <?php if ($i == $default) echo 'selected="selected"' ?> >
+                    11h
+                </option>
+
+                <option value="720" <?php if ($i == $default) echo 'selected="selected"' ?> >
                     12h
                 </option>
 
@@ -79,7 +99,7 @@
 
             <label for="heatTemp">Boost Temp:</label> <select name="temp" id="heatTemp">
                 <?php
-                $default = 18;
+                $default = 19.5;
 
                 for ($i = 0; $i <= 11; $i = $i + 3) :
                     ?>
@@ -110,7 +130,7 @@
             </select>
 
             </br>
-            <label for="heatDelay">Delay Time:</label>
+            <label for="heatDelay">Delay Start:</label>
 
             <select name="delay" id="heatDelay">
                 <?php
@@ -130,6 +150,46 @@
                             echo "0h ".sprintf('%02d',$i)."m";
                         }
                         ?>
+                    </option>
+
+                    <option value="720" <?php if ($i == $default) echo 'selected="selected"' ?> >
+                        7h
+                    </option>
+
+                    <option value="720" <?php if ($i == $default) echo 'selected="selected"' ?> >
+                        8h
+                    </option>
+
+                    <option value="720" <?php if ($i == $default) echo 'selected="selected"' ?> >
+                        9h
+                    </option>
+
+                    <option value="720" <?php if ($i == $default) echo 'selected="selected"' ?> >
+                        10h
+                    </option>
+
+                    <option value="720" <?php if ($i == $default) echo 'selected="selected"' ?> >
+                        11h
+                    </option>
+
+                    <option value="720" <?php if ($i == $default) echo 'selected="selected"' ?> >
+                        12h
+                    </option>
+
+                    <option value="1440" <?php if ($i == $default) echo 'selected="selected"' ?> >
+                        24h/1d
+                    </option>
+
+                    <option value="2880" <?php if ($i == $default) echo 'selected="selected"' ?> >
+                        48h/2d
+                    </option>
+
+                    <option value="4320" <?php if ($i == $default) echo 'selected="selected"' ?> >
+                        72h/3d
+                    </option>
+
+                    <option value="5760" <?php if ($i == $default) echo 'selected="selected"' ?> >
+                        96h/4d
                     </option>
 
                 <?php endfor; ?>
