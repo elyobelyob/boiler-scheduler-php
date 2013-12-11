@@ -152,7 +152,9 @@
                         ?>
                     </option>
 
-                    <option value="420" <?php if ($i == $default) echo 'selected="selected"' ?> >
+                <?php endfor; ?>
+
+                <option value="420" <?php if ($i == $default) echo 'selected="selected"' ?> >
                         7h 00m
                     </option>
 
@@ -191,8 +193,6 @@
                     <option value="5760" <?php if ($i == $default) echo 'selected="selected"' ?> >
                         96h/4d
                     </option>
-
-                <?php endfor; ?>
 
             </select>
 
