@@ -1,10 +1,10 @@
 <?php
-class Api_HistoryOverrideController extends Zend_Controller_Action
+class Api_HistoryoverrideController extends Zend_Controller_Action
 {
 	private $_model;
 	public function init()
 	{
-		$this->_model = new Elyob_Model_HistoryOverride();
+		$this->_model = new Elyob_Model_Historyoverride();
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender();
 	}

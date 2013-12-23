@@ -1,9 +1,9 @@
 <?php
 
-class Elyob_HistoryOverrideController extends Zend_Controller_Action
+class Elyob_HistoryoverrideController extends Zend_Controller_Action
 { 
     public function indexAction()
     {    	
-    	$this->view->headTitle('HistoryOverride');
+    	$this->view->headTitle('Historyoverride');
     }
 }

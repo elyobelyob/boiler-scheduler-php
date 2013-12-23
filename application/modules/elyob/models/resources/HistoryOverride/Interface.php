@@ -1,5 +1,5 @@
 <?php
-interface Elyob_Resource_HistoryOverride_Interface
+interface Elyob_Resource_Historyoverride_Interface
 {
 
 }

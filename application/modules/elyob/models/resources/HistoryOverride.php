@@ -1,9 +1,9 @@
 <?php
-class Elyob_Resource_HistoryOverride extends SF_Model_Resource_Db_Table_Abstract
+class Elyob_Resource_Historyoverride extends SF_Model_Resource_Db_Table_Abstract
 {
 	protected $_name = 'override';
 	protected $_primary = 'id';
-	protected $_rowClass = 'Elyob_Resource_HistoryOverride_Item';
+	protected $_rowClass = 'Elyob_Resource_Historyoverride_Item';
 	protected $_nameColumn = "id";
 
     public function getHistory()
