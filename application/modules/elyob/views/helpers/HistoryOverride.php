@@ -4,13 +4,13 @@
  * @author james
  *
  */
-class Zend_View_Helper_HistoryOverride extends Zend_View_Helper_Abstract
+class Zend_View_Helper_Historyoverride extends Zend_View_Helper_Abstract
 {
 	private $_model;
 	
     public function history($id = null)
     {
-    	$this->_model = new Elyob_Model_HistoryOverride();
+    	$this->_model = new Elyob_Model_Historyoverride();
     	if (is_null($id)) return $this;
     	
 		return $this->_model->getHistoryLastFifty();
