@@ -40,7 +40,7 @@ CREATE TABLE `override` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `type` varchar(75) DEFAULT NULL,
   `date` datetime DEFAULT NULL,
-  `length` int(5) DEFAULT NULL,
+  `duration` int(5) DEFAULT NULL,
   `boost` int(1) DEFAULT '1',
   `enabled` int(1) DEFAULT '1',
   `heatingTemp` int(2) DEFAULT NULL,

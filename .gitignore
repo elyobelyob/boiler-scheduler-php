@@ -5,3 +5,4 @@ public/.htaccess
 composer.lock
 vendor/*
 *.tmp
+.idea/*

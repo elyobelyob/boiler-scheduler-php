@@ -62,7 +62,7 @@ while($rows = mysql_fetch_assoc($override)) {
         echo $rows['datestart'];
         echo " -> ";
         echo $rows['dateend'].PHP_EOL;
-        echo $rows['length']." ";
+        echo $rows['duration']." ";
         echo $rows['heatingTemp'].PHP_EOL;
 
 }
@@ -154,13 +154,13 @@ function getOverride() {
 	//     from boiler.override 
 	//     where UNIX_TIMESTAMP(date) < 1361547580 and (UNIX_TIMESTAMP(date+length) >
     $query = "SELECT date as datestart,
-                    (date + INTERVAL length MINUTE) as dateend,
-                    length,
+                    (date + INTERVAL duration MINUTE) as dateend,
+                    duration,
                     heatingTemp
                 FROM boiler.override WHERE 
                     enabled = 1
                     AND UNIX_TIMESTAMP(date) < ".mktime()." 
-                    AND (UNIX_TIMESTAMP(date + INTERVAL length MINUTE) > ".mktime().")
+                    AND (UNIX_TIMESTAMP(date + INTERVAL duration MINUTE) > ".mktime().")
                     ORDER BY id DESC LIMIT 1; ";
     //echo $query.PHP_EOL;
     $result = mysql_query($query) or die(mysql_error());
@@ -170,7 +170,7 @@ function getOverride() {
 	echo $row['datestart'];
 	echo " -> ";
 	echo $row['dateend'].PHP_EOL;
-	echo $row['length']." ";
+	echo $row['duration']." ";
 	echo $row['heatingTemp'].PHP_EOL;
     }
 */

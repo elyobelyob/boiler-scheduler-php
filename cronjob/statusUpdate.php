@@ -117,17 +117,17 @@ function getHoliday() {
 function getOverride() {
     echo "<b>current/next override</b>" . PHP_EOL;
     // Override
-    // select * from override where date > 1361535136 and (date+length > 1361535136)
-    // select UNIX_TIMESTAMP(date) as date, UNIX_TIMESTAMP(date+length) as datelength 
+    // select * from override where date > 1361535136 and (date+duration > 1361535136)
+    // select UNIX_TIMESTAMP(date) as date, UNIX_TIMESTAMP(date+duration) as datelength
 	//     from boiler.override 
-	//     where UNIX_TIMESTAMP(date) < 1361547580 and (UNIX_TIMESTAMP(date+length) >
+	//     where UNIX_TIMESTAMP(date) < 1361547580 and (UNIX_TIMESTAMP(date+duration) >
     $query = "SELECT    date as datestart,
-                        (date + INTERVAL length MINUTE) as dateend,
-                        length,
+                        (date + INTERVAL duration MINUTE) as dateend,
+                        duration,
                         heatingTemp
                 FROM boiler.override WHERE 
                     enabled = 1
-                    AND (UNIX_TIMESTAMP(date + INTERVAL length MINUTE) > ".mktime().")
+                    AND (UNIX_TIMESTAMP(date + INTERVAL duration MINUTE) > ".mktime().")
                     LIMIT 1; ";
     //echo $query.PHP_EOL;
     $result = mysql_query($query) or die(mysql_error());

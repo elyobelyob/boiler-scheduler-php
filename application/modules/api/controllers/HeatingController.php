@@ -30,7 +30,7 @@ class Api_HeatingController extends Zend_Controller_Action
             $data = array(
                 'type'          => 'heat',
                 'date'          => date('Y-m-d H:m:s'),
-                'length'        => $time,
+                'duration'        => $time,
                 'boost'         => 1,
                 'enabled'       => 1,
                 'heatingTemp'   => $temp
@@ -41,7 +41,7 @@ class Api_HeatingController extends Zend_Controller_Action
              
             // Set column values as appropriate for your application
             $override->date = date('Y-m-d H:m:s');
-            $override->length = $temp;
+            $override->duration = $temp;
              
             // INSERT the new row to the database
             $override->save();   

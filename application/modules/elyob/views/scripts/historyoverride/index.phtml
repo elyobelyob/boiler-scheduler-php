@@ -1,0 +1,36 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tableContainer').jtable({
+            title: 'HistoryOverride',
+            actions: {
+                listAction: '/api/historyoverride/list'
+            },
+            fields: {
+                id: {
+                    key: true,
+                    list: false
+                },
+                heatingTemp: {
+                    title: 'Temp',
+                    width: '25%',
+                },
+                date: {
+                    title: 'Date',
+                    width: '45%',
+                },
+                duration: {
+                    title: 'Duration',
+                    width: '15%',
+                },
+                enabled: {
+                    title: 'Enabled',
+                    width: '15%',
+                }
+            }
+        });
+
+        $('#tableContainer').jtable('load');
+    });
+</script>
+
+<div id="tableContainer"></div>
