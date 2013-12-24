@@ -62,9 +62,6 @@ class Api_ConfigurationController extends Zend_Controller_Action
             ->appendBody($json);
     }
 
-
-
-
     public function boostAction()
 	{
 		
