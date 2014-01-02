@@ -16,7 +16,7 @@ if (!$con)
 //Temperature outside check .. if less than 5 degrees .. turn on 30 mins earlier?
 //move through a list of preferred temps to get latest
 //$listTemp = array('therm_temp','lou_temp', 'bed1_temp', 'out_temp');
-$listTemp = array('lou_temp','bed1_temp','bath_temp','loft_temp','out_temp',);
+$listTemp = array('lou_temp'=>1,'bed1_temp'=>9,'bath_temp'=>23,'loft_temp'=>3,'out_temp'=>2);
 $dayNames = array( '','Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' );
 
 echo "<b>show temps</b>" . PHP_EOL;
