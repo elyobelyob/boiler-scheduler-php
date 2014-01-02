@@ -24,18 +24,8 @@ $heatingTemp = 8;
 //$listTemp = array('therm_temp','lou_temp', 'bed1_temp', 'out_temp');
 $listTemp = array('lou_temp');
 
-for ($i=0;$i<count($listTemp);$i++) {
-    // we grab from emoncms
-    if ($data = getEmonTemp($listTemp[$i])) {
-
-    	while($rows = mysql_fetch_assoc($data)) {
-    		$currentTemp = $rows['thermTemp'];
-        	echo $rows['name']. ' -> '.$rows['thermTemp'].PHP_EOL;
-        	if (count($rows) > 0) { break; }
-    	}
-
-    }
-}
+$currentTemp = (float) str_replace('"','',getEmonTemp(1));
+echo $currentTemp;
 
 $schedule = getSchedule();
 while($rows = mysql_fetch_assoc($schedule)) {
@@ -81,13 +71,18 @@ echo "Finish scheduler : " . date("d/m/y H.i:s", time()) . PHP_EOL;
 
 function getEmonTemp($name) {
     echo "<b>checking temps</b>" . PHP_EOL;
-    $query = "SELECT name,
-                     time,
-                     value AS thermTemp 
-                     FROM emoncms.feeds WHERE name = '".$name."' LIMIT 0,1";
-    //echo $query . PHP_EOL;
-    $result = mysql_query($query);
-    return $result;    
+    $c = curl_init("http://emoncms.elyob.com/feed/value.json?apikey=a234714bc257c9c6706eb2f7b47c28f8&id=1");
+    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+
+    $html = curl_exec($c);
+
+    if (curl_error($c))
+        die(curl_error($c));
+
+
+    curl_close($c);
+
+    return $html;
 }
 
 function getSchedule() {
