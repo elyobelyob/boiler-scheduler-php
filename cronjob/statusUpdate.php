@@ -20,14 +20,12 @@ $listTemp = array('lou_temp'=>1,'bed1_temp'=>9,'bath_temp'=>23,'loft_temp'=>3,'o
 $dayNames = array( '','Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' );
 
 echo "<b>show temps</b>" . PHP_EOL;
-for ($i=0;$i<count($listTemp);$i++) {
+foreach ($listTemp as $key=>$value) {
     // we grab from emoncms
-    if ($data = getEmonTemp($listTemp[$i])) {
+    echo $listTemp[$value];
 
-    	while($rows = mysql_fetch_assoc($data)) {
-    	    echo $rows['name']. ' -> '. $rows['thermTemp'].'c'.PHP_EOL;
-    	}
-
+    if ($data = getEmonTemp($value)) {
+        echo $key. ' -> '. $data.'c'.PHP_EOL;
     }
 }
 
@@ -67,7 +65,6 @@ echo "Finish status update : " . date("d/m/y H.i:s", time()) . PHP_EOL;
 // Main Functions
 function getEmonTemp($name) {
     global $apikey, $emonserver;
-    echo "<b>checking temps</b>" . PHP_EOL;
     $c = curl_init("http://".$emonserver."/feed/value.json?apikey=".$apikey."&id=".$name);
     curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 
