@@ -22,11 +22,8 @@ $dayNames = array( '','Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'F
 echo "<b>show temps</b>" . PHP_EOL;
 foreach ($listTemp as $key=>$value) {
     // we grab from emoncms
-    echo $listTemp[$value];
-
-    if ($data = getEmonTemp($value)) {
-        echo $key. ' -> '. $data.'c'.PHP_EOL;
-    }
+    $currentTemp = (float) str_replace('"','',getEmonTemp($value));
+    echo $key. ' -> '. $currentTemp.'c'.PHP_EOL;
 }
 
 $schedule = getSchedule();
