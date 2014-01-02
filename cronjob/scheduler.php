@@ -25,7 +25,7 @@ $heatingTemp = 8;
 $listTemp = array('lou_temp');
 
 $currentTemp = (float) str_replace('"','',getEmonTemp(1));
-echo $currentTemp;
+echo $currentTemp.PHP_EOL;
 
 $schedule = getSchedule();
 while($rows = mysql_fetch_assoc($schedule)) {
@@ -70,9 +70,9 @@ echo "Finish scheduler : " . date("d/m/y H.i:s", time()) . PHP_EOL;
 // Main Functions
 
 function getEmonTemp($name) {
-    global $apikey;
+    global $apikey, $emonserver;
     echo "<b>checking temps</b>" . PHP_EOL;
-    $c = curl_init("http://emoncms.elyob.com/feed/value.json?apikey=".$apikey."&id=".$name);
+    $c = curl_init("http://".$emonserver."/feed/value.json?apikey=".$apikey."&id=".$name);
     curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 
     $html = curl_exec($c);
