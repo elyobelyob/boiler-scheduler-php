@@ -12,7 +12,6 @@ if (!$con)
   die('Could not connect: ' . mysql_error());
   }
 
-
 //Temperature outside check .. if less than 5 degrees .. turn on 30 mins earlier?
 //move through a list of preferred temps to get latest
 //$listTemp = array('therm_temp','lou_temp', 'bed1_temp', 'out_temp');
@@ -58,7 +57,6 @@ while($rows = mysql_fetch_assoc($override)) {
 echo PHP_EOL;
 echo "Finish status update : " . date("d/m/y H.i:s", time()) . PHP_EOL;
 
-
 // Main Functions
 function getEmonTemp($name) {
     global $apikey, $emonserver;
@@ -69,7 +67,6 @@ function getEmonTemp($name) {
 
     if (curl_error($c))
         die(curl_error($c));
-
 
     curl_close($c);
 
@@ -97,7 +94,6 @@ function getSchedule() {
     $result = mysql_query($query);
     
     return $result;
-    
 }
 
 function getHoliday() {
@@ -110,8 +106,7 @@ function getHoliday() {
     //echo $query . PHP_EOL;
     $result = mysql_query($query);
     
-    return $result; 
-
+    return $result;
 }
 
 function getOverride() {
@@ -134,9 +129,4 @@ function getOverride() {
 
     return $result;
 }
-
-
-
-
-
 
