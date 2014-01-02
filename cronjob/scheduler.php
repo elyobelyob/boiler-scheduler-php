@@ -70,8 +70,9 @@ echo "Finish scheduler : " . date("d/m/y H.i:s", time()) . PHP_EOL;
 // Main Functions
 
 function getEmonTemp($name) {
+    global $apikey;
     echo "<b>checking temps</b>" . PHP_EOL;
-    $c = curl_init("http://emoncms.elyob.com/feed/value.json?apikey=a234714bc257c9c6706eb2f7b47c28f8&id=1");
+    $c = curl_init("http://emoncms.elyob.com/feed/value.json?apikey=".$apikey."&id=".$name);
     curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 
     $html = curl_exec($c);
