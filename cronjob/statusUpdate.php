@@ -65,17 +65,23 @@ echo "Finish status update : " . date("d/m/y H.i:s", time()) . PHP_EOL;
 
 
 // Main Functions
-
 function getEmonTemp($name) {
-    $query = "SELECT name,
-                     time,
-                     value AS thermTemp 
-                     FROM emoncms.feeds WHERE name = '".$name."' LIMIT 0,1";
-    //echo $query . PHP_EOL;
-    $result = mysql_query($query);
-    //echo mysql_num_rows($result) . PHP_EOL;
-    return $result;    
+    global $apikey, $emonserver;
+    echo "<b>checking temps</b>" . PHP_EOL;
+    $c = curl_init("http://".$emonserver."/feed/value.json?apikey=".$apikey."&id=".$name);
+    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+
+    $html = curl_exec($c);
+
+    if (curl_error($c))
+        die(curl_error($c));
+
+
+    curl_close($c);
+
+    return $html;
 }
+
 
 function getSchedule() {
     echo "<b>todays schedule</b>" . PHP_EOL;
@@ -134,6 +140,7 @@ function getOverride() {
 
     return $result;
 }
+
 
 
 
